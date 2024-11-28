@@ -50,16 +50,44 @@ class Homepage extends StatelessWidget {
                                   fontSize: 12
                               ),
                             ),
-                            Padding(
-                              padding: EdgeInsets.all(20),
-                              child: Row(
-                                children: [
-
-                                ],
-                              ),
-                            )
                           ],
                         ),
+                        SizedBox(height: 20,),
+                        Container(
+                          width: MediaQuery.of(context).size.width*0.51,
+                          child: Container(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                SizedBox(
+                                  height: 45,
+                                  child: TextField(
+                                    decoration: InputDecoration(
+                                        enabledBorder: OutlineInputBorder(
+                                          borderRadius: BorderRadius.circular(20)
+                                        ),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      hintText: "Cari kursus di SkillNova™.....",
+                                      suffixIcon: Icon(
+                                        Icons.search,
+                                        color: Colors.black,
+                                      ),
+                                      suffixIconColor: Color(0xff782A8C)
+                                    ),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: Color(0xff636363)
+                                    ),
+                                    textAlign : TextAlign.start,
+                                    textAlignVertical: TextAlignVertical.center,
+                                  ),
+                                )
+                              ],
+                            ),
+                          ),
+                        )
                       ],
                     ),
                     SizedBox(width: 60,),
@@ -81,23 +109,28 @@ class Homepage extends StatelessWidget {
                               fontSize: 12
                           ),
                         ),
-                        Container(
-                          width: 100,
-                          height: 14,
-                          decoration: BoxDecoration(color: Color(0xffd9d9d9), borderRadius: BorderRadius.circular(20)),
-                          child: const Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Text(
-                                "19.1K / 20K XP",
-                                style: TextStyle(
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.bold,
-                                  color: Color(0xff782A8C)
-                                ),
+                        Stack(
+                          children: <Widget>[
+                            SizedBox(
+                              width: 100,
+                              height: 15,
+                              child: LinearProgressIndicator(
+                                backgroundColor: Color(0xffD9D9D9),
+                                valueColor: AlwaysStoppedAnimation(Color(0xff5271FF)),
+                                value: 0.6,
+                                borderRadius: BorderRadius.circular(20),
                               ),
-                            ],
-                          ),
+                            ),
+                            Align(
+                              widthFactor: 1.40,
+                              child: Text("19.1K / 20K XP",
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xff782A8C)
+                              ),
+                            ), alignment: Alignment.topCenter, ),
+                          ],
                         ),
                         const SizedBox(height: 6),
                         const Text(

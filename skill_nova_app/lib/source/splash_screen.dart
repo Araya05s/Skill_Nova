@@ -16,9 +16,9 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => const Homepage(),
+        builder: (_) => HomePage(),
       ));
     });
   }
@@ -35,17 +35,17 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
     return Scaffold(
       body: Container(
         width: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Color(0xff782A8C)
         ),
         child: Container(
-          padding: EdgeInsets.only(bottom: 150),
+          padding: const EdgeInsets.only(bottom: 150),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset("images/Skill-Nova-logo.png", width: 275,),
-              SizedBox(height: 12,),
-              Text(
+              const SizedBox(height: 12,),
+              const Text(
                 "SKILL NOVA",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,

@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:skill_nova_app/source/homepage.dart';
 
 class BottomNavBar extends StatelessWidget {
-  const BottomNavBar({super.key});
+
+  final int currentIndex;
+  final Function(int) onItemTapped;
+
+  BottomNavBar({super.key,
+    required this.currentIndex,
+    required this.onItemTapped,});
 
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-    currentIndex: 0,
+    currentIndex: currentIndex,
+    onTap: onItemTapped,
     backgroundColor: const Color(0xff782A8C),
     type: BottomNavigationBarType.fixed,
     items: const [

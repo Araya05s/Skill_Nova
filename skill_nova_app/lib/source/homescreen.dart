@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'bottombar.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -73,11 +72,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                     fillColor: Colors.white,
                                     filled: true,
                                     hintText: "Cari kursus di SkillNova™.....",
-                                    suffixIcon: const Icon(
-                                      Icons.search,
-                                      color: Colors.black,
+                                    suffixIcon:   Container(
+                                      height: 10,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        color: const Color(0xff782A8C)
+                                      ),
+                                      child: const Icon(
+                                        Icons.search,
+                                        color: Colors.white
+                                      ),
                                     ),
-                                    suffixIconColor: const Color(0xff782A8C)
                                   ),
                                   style: const TextStyle(
                                     fontSize: 12,

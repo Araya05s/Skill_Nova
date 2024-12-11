@@ -130,7 +130,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                         )
                       ],
                     ),
-                    const SizedBox(width:27,),
+                    SizedBox(width:MediaQuery.of(context).size.width*0.068,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -401,7 +401,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 10,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.011,),
               Stack(
                 children: [
                   Container(
@@ -532,7 +532,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 10,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.011,),
               Stack(
                 children: [
                   Container(
@@ -663,7 +663,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 2,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.003,),
               const Text(
                 "Terus lanjutkan belajarnya! Tinggal 3 misi lagi sebelum kamu mencapai Level 28, lho!",
                 style: TextStyle(

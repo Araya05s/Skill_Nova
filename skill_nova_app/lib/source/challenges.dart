@@ -78,19 +78,9 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                           ],
                         ),
                         const SizedBox(height: 20,),
-                        SizedBox(
-                          width: MediaQuery.of(context).size.width*0.59,
-                          child: const Column(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              
-                            ],
-                          ),
-                        )
                       ],
                     ),
-                    const SizedBox(width:20,),
+                    SizedBox(width: MediaQuery.of(context).size.width*0.05,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -174,7 +164,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                             ],
                           ),
                         ),
-                        const SizedBox(width: 28,),
+                        SizedBox(width: MediaQuery.of(context).size.width*0.06,),
                         Container(
                           padding: const EdgeInsets.only(top: 5, right: 15, left: 15, bottom: 5),
                           decoration: BoxDecoration(color: const Color(0xFFAF40CC), borderRadius: BorderRadius.circular(5)),
@@ -382,7 +372,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 10,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.0115,),
               Stack(
                 children: [
                   Container(
@@ -534,7 +524,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 10,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.0115,),
               Stack(
                 children: [
                   Container(
@@ -686,7 +676,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 2,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.0025,),
               const Text(
                 "Terus lanjutkan belajarnya! Selesaikan tantangan untuk mencapai Level selanjutnya!",
                 style: TextStyle(

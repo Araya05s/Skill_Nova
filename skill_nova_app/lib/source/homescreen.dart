@@ -99,7 +99,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         )
                       ],
                     ),
-                    const SizedBox(width: 60,),
+                    SizedBox(width: MediaQuery.of(context).size.width*0.152,),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -263,7 +263,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 16,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.017,),
               Stack(
                 children: [
                   Container(
@@ -348,7 +348,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 16,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.017,),
               Stack(
                 children: [
                   Container(
@@ -433,7 +433,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   )
                 ],
               ),
-              const SizedBox(height: 16,),
+              SizedBox(height: MediaQuery.of(context).size.height*0.017,),
               Stack(
                 children: [
                   Container(

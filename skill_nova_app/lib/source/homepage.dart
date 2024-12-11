@@ -5,6 +5,8 @@ import 'package:skill_nova_app/source/missions.dart';
 import 'package:skill_nova_app/source/bottombar.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -12,9 +14,9 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   final List<Widget> _pages = [
-    HomeScreen(),
-    MissionsScreen(),
-    ChallengesScreen(),
+    const HomeScreen(),
+    const MissionsScreen(),
+    const ChallengesScreen(),
   ];
 
   void _onItemTapped(int index) {

@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:skill_nova_app/source/homepage.dart';
 
 class BottomNavBar extends StatelessWidget {
 
   final int currentIndex;
   final Function(int) onItemTapped;
 
-  BottomNavBar({super.key,
+  const BottomNavBar({super.key,
     required this.currentIndex,
     required this.onItemTapped,});
 

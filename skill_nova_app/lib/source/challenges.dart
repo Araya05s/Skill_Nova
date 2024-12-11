@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'bottombar.dart';
 
 class ChallengesScreen extends StatefulWidget {
+  const ChallengesScreen({super.key});
+
   @override
   _ChallengesScreenState createState() => _ChallengesScreenState();
 }
@@ -32,7 +33,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 3,),
+                        const SizedBox(height: 3,),
                         Container(
                           padding: const EdgeInsets.all(2),
                           decoration: BoxDecoration(border: Border.all(), borderRadius: BorderRadius.circular(20), color: Colors.white),
@@ -42,16 +43,16 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            SizedBox(height: 20,),
+                            const SizedBox(height: 20,),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                     decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.5), color: Colors.white),
-                                    child: Icon(Icons.arrow_back, color: Colors.black, size: 30,)
+                                    child: const Icon(Icons.arrow_back, color: Colors.black, size: 30,)
                                 ),
-                                SizedBox(width: 80),
-                                Column(
+                                const SizedBox(width: 80),
+                                const Column(
                                   children: [
                                     Text(
                                       "Tantangan",
@@ -79,7 +80,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                         const SizedBox(height: 20,),
                         SizedBox(
                           width: MediaQuery.of(context).size.width*0.59,
-                          child: Column(
+                          child: const Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -136,18 +137,18 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
                 Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Container(
-                          padding: EdgeInsets.only(top: 5, right: 15, left: 15, bottom: 5),
-                          decoration: BoxDecoration(color: Color(0xFFAF40CC), borderRadius: BorderRadius.circular(5)),
+                          padding: const EdgeInsets.only(top: 5, right: 15, left: 15, bottom: 5),
+                          decoration: BoxDecoration(color: const Color(0xFFAF40CC), borderRadius: BorderRadius.circular(5)),
                           width: 160,
                           height: 75,
-                          child: Column(
+                          child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Text(
@@ -173,13 +174,13 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                             ],
                           ),
                         ),
-                        SizedBox(width: 28,),
+                        const SizedBox(width: 28,),
                         Container(
-                          padding: EdgeInsets.only(top: 5, right: 15, left: 15, bottom: 5),
-                          decoration: BoxDecoration(color: Color(0xFFAF40CC), borderRadius: BorderRadius.circular(5)),
+                          padding: const EdgeInsets.only(top: 5, right: 15, left: 15, bottom: 5),
+                          decoration: BoxDecoration(color: const Color(0xFFAF40CC), borderRadius: BorderRadius.circular(5)),
                           width: 160,
                           height: 75,
-                          child: Column(
+                          child: const Column(
                             children: [
                               Text(
                                 "Total Tantangan Selesai",
@@ -253,11 +254,11 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                   const SizedBox(width: 6,),
                                   Column(
                                     children: [
-                                      Column(
+                                      const Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            const Text(
+                                            Text(
                                               "LOOP DI PHYTON",
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -274,9 +275,9 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           const SizedBox(height: 4),
                                           SizedBox(
                                             width: MediaQuery.of(context).size.width*0.49,
-                                            child: Row(
+                                            child: const Row(
                                               children: [
-                                                const Text(
+                                                Text(
                                                   "Kategori : ",
                                                   style: TextStyle(
                                                     color: Colors.white,
@@ -286,7 +287,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
                                                 ),
-                                                const Text(
+                                                Text(
                                                   "Sains Komputer",
                                                   style: TextStyle(
                                                     color: Color(0xFFF2D049),
@@ -299,13 +300,13 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(height: 5,),
-                                          Container(
+                                          const SizedBox(height: 5,),
+                                          SizedBox(
                                             width: MediaQuery.of(context).size.width*0.49,
-                                            child: Row(
+                                            child: const Row(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
-                                                const Text(
+                                                Text(
                                                   "Tingkat Kesulitan : ",
                                                   style: TextStyle(
                                                     color: Colors.white,
@@ -313,7 +314,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                     fontSize: 11,
                                                   ),
                                                 ),
-                                                const Text(
+                                                Text(
                                                   "Muda",
                                                   style: TextStyle(
                                                     color: Color(0xff1EFF2D),
@@ -327,16 +328,14 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           const SizedBox(height: 3),
                                           SizedBox(
                                             width: MediaQuery.of(context).size.width*0.49,
-                                            child: Row(
+                                            child: const Row(
                                               children: [
-                                                Container(
-                                                  child: Icon(
-                                                    Icons.star,
-                                                    size: 16,
-                                                    color: Color(0xFFF2D049),
-                                                  ),
+                                                Icon(
+                                                  Icons.star,
+                                                  size: 16,
+                                                  color: Color(0xFFF2D049),
                                                 ),
-                                                const Text(
+                                                Text(
                                                   " + 1.430 XP",
                                                   style: TextStyle(
                                                     color: Color(0xFFF2D049),
@@ -351,21 +350,21 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           ),
                                           Row(
                                             children: [
-                                              SizedBox(width: 105,),
-                                              Container(
+                                              const SizedBox(width: 105,),
+                                              SizedBox(
                                                 width: 99,
                                                 height: 25,
                                                 child: ElevatedButton(
                                                   onPressed: () {},
-                                                  child: Text("MULAI"),
                                                   style: ElevatedButton.styleFrom(
-                                                    backgroundColor: Color(0xffEEF1FF),
-                                                    foregroundColor: Color(0xff5271FF),
-                                                    textStyle: TextStyle(
+                                                    backgroundColor: const Color(0xffEEF1FF),
+                                                    foregroundColor: const Color(0xff5271FF),
+                                                    textStyle: const TextStyle(
                                                         fontSize: 13,
                                                         fontWeight: FontWeight.bold
                                                     ),
                                                   ),
+                                                  child: const Text("MULAI"),
                                                 ),
                                               ),
                                             ],
@@ -407,11 +406,11 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                   const SizedBox(width: 6,),
                                   Column(
                                     children: [
-                                      Column(
+                                      const Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            const Text(
+                                            Text(
                                               "TIPE-TIPE KUAS",
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -428,9 +427,9 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           const SizedBox(height: 4),
                                           SizedBox(
                                             width: MediaQuery.of(context).size.width*0.49,
-                                            child: Row(
+                                            child: const Row(
                                               children: [
-                                                const Text(
+                                                Text(
                                                   "Kategori : ",
                                                   style: TextStyle(
                                                     color: Colors.white,
@@ -440,8 +439,8 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
                                                 ),
-                                                const Text(
-                                                  "Sains Komputer",
+                                                Text(
+                                                  "Seni",
                                                   style: TextStyle(
                                                     color: Color(0xFFF2D049),
                                                     fontWeight: FontWeight.bold,
@@ -453,13 +452,13 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(height: 5,),
-                                          Container(
+                                          const SizedBox(height: 5,),
+                                          SizedBox(
                                             width: MediaQuery.of(context).size.width*0.49,
-                                            child: Row(
+                                            child: const Row(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
-                                                const Text(
+                                                Text(
                                                   "Tingkat Kesulitan : ",
                                                   style: TextStyle(
                                                     color: Colors.white,
@@ -467,7 +466,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                     fontSize: 11,
                                                   ),
                                                 ),
-                                                const Text(
+                                                Text(
                                                   "Sedang",
                                                   style: TextStyle(
                                                     color: Color(0xffFAFD4C),
@@ -481,16 +480,14 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           const SizedBox(height: 3),
                                           SizedBox(
                                             width: MediaQuery.of(context).size.width*0.49,
-                                            child: Row(
+                                            child: const Row(
                                               children: [
-                                                Container(
-                                                  child: Icon(
-                                                    Icons.star,
-                                                    size: 16,
-                                                    color: Color(0xFFF2D049),
-                                                  ),
+                                                Icon(
+                                                  Icons.star,
+                                                  size: 16,
+                                                  color: Color(0xFFF2D049),
                                                 ),
-                                                const Text(
+                                                Text(
                                                   " + 1.650 XP",
                                                   style: TextStyle(
                                                     color: Color(0xFFF2D049),
@@ -505,21 +502,21 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           ),
                                           Row(
                                             children: [
-                                              SizedBox(width: 105,),
-                                              Container(
+                                              const SizedBox(width: 105,),
+                                              SizedBox(
                                                 width: 99,
                                                 height: 25,
                                                 child: ElevatedButton(
                                                   onPressed: () {},
-                                                  child: Text("MULAI"),
                                                   style: ElevatedButton.styleFrom(
-                                                    backgroundColor: Color(0xffEEF1FF),
-                                                    foregroundColor: Color(0xff5271FF),
-                                                    textStyle: TextStyle(
+                                                    backgroundColor: const Color(0xffEEF1FF),
+                                                    foregroundColor: const Color(0xff5271FF),
+                                                    textStyle: const TextStyle(
                                                         fontSize: 13,
                                                         fontWeight: FontWeight.bold
                                                     ),
                                                   ),
+                                                  child: const Text("MULAI"),
                                                 ),
                                               ),
                                             ],
@@ -561,11 +558,11 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                   const SizedBox(width: 6,),
                                   Column(
                                     children: [
-                                      Column(
+                                      const Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            const Text(
+                                            Text(
                                               "DAILY CONVERSATION",
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -582,9 +579,9 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           const SizedBox(height: 4),
                                           SizedBox(
                                             width: MediaQuery.of(context).size.width*0.49,
-                                            child: Row(
+                                            child: const Row(
                                               children: [
-                                                const Text(
+                                                Text(
                                                   "Kategori : ",
                                                   style: TextStyle(
                                                     color: Colors.white,
@@ -594,7 +591,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                   overflow: TextOverflow.ellipsis,
                                                   maxLines: 1,
                                                 ),
-                                                const Text(
+                                                Text(
                                                   "Bahasa",
                                                   style: TextStyle(
                                                     color: Color(0xFFF2D049),
@@ -607,13 +604,13 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                               ],
                                             ),
                                           ),
-                                          SizedBox(height: 5,),
-                                          Container(
+                                          const SizedBox(height: 5,),
+                                          SizedBox(
                                             width: MediaQuery.of(context).size.width*0.49,
-                                            child: Row(
+                                            child: const Row(
                                               mainAxisAlignment: MainAxisAlignment.start,
                                               children: [
-                                                const Text(
+                                                Text(
                                                   "Tingkat Kesulitan : ",
                                                   style: TextStyle(
                                                     color: Colors.white,
@@ -621,7 +618,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                     fontSize: 11,
                                                   ),
                                                 ),
-                                                const Text(
+                                                Text(
                                                   "Sulit",
                                                   style: TextStyle(
                                                     color: Color(0xffFF282B),
@@ -635,16 +632,14 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           const SizedBox(height: 3),
                                           SizedBox(
                                             width: MediaQuery.of(context).size.width*0.49,
-                                            child: Row(
+                                            child: const Row(
                                               children: [
-                                                Container(
-                                                  child: Icon(
-                                                    Icons.star,
-                                                    size: 16,
-                                                    color: Color(0xFFF2D049),
-                                                  ),
+                                                Icon(
+                                                  Icons.star,
+                                                  size: 16,
+                                                  color: Color(0xFFF2D049),
                                                 ),
-                                                const Text(
+                                                Text(
                                                   " + 2.000 XP",
                                                   style: TextStyle(
                                                     color: Color(0xFFF2D049),
@@ -659,21 +654,21 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                           ),
                                           Row(
                                             children: [
-                                              SizedBox(width: 105,),
-                                              Container(
+                                              const SizedBox(width: 105,),
+                                              SizedBox(
                                                 width: 99,
                                                 height: 25,
                                                 child: ElevatedButton(
                                                   onPressed: () {},
-                                                  child: Text("MULAI"),
                                                   style: ElevatedButton.styleFrom(
-                                                    backgroundColor: Color(0xffEEF1FF),
-                                                    foregroundColor: Color(0xff5271FF),
-                                                    textStyle: TextStyle(
+                                                    backgroundColor: const Color(0xffEEF1FF),
+                                                    foregroundColor: const Color(0xff5271FF),
+                                                    textStyle: const TextStyle(
                                                         fontSize: 13,
                                                         fontWeight: FontWeight.bold
                                                     ),
                                                   ),
+                                                  child: const Text("MULAI"),
                                                 ),
                                               ),
                                             ],
@@ -691,8 +686,8 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                   )
                 ],
               ),
-              SizedBox(height: 2,),
-              Text(
+              const SizedBox(height: 2,),
+              const Text(
                 "Terus lanjutkan belajarnya! Selesaikan tantangan untuk mencapai Level selanjutnya!",
                 style: TextStyle(
                     fontSize: 8.25,
@@ -724,8 +719,8 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                     ), ),
                 ],
               ),
-              SizedBox(height: 2,),
-              Text(
+              const SizedBox(height: 2,),
+              const Text(
                 "Level 27",
                 style: TextStyle(
                     fontSize: 10.5,

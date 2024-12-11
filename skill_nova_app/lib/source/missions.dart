@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'bottombar.dart';
 
 class MissionsScreen extends StatefulWidget {
+  const MissionsScreen({super.key});
+
   @override
   _MissionsScreenState createState() => _MissionsScreenState();
 }
@@ -45,10 +46,10 @@ class _MissionsScreenState extends State<MissionsScreen> {
                               children: [
                                 Container(
                                   decoration: BoxDecoration(borderRadius: BorderRadius.circular(12.5), color: Colors.white),
-                                    child: Icon(Icons.arrow_back, color: Colors.black, size: 30,)
+                                    child: const Icon(Icons.arrow_back, color: Colors.black, size: 30,)
                                 ),
-                                SizedBox(width: 70),
-                                Text(
+                                const SizedBox(width: 70),
+                                const Text(
                                   "Statistik Misi",
                                   style: TextStyle(
                                     fontSize: 22,
@@ -63,7 +64,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                         const SizedBox(height: 20,),
                         SizedBox(
                           width: MediaQuery.of(context).size.width*0.59,
-                          child: Column(
+                          child: const Column(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -191,16 +192,16 @@ class _MissionsScreenState extends State<MissionsScreen> {
                     )
                   ],
                 ),
-                SizedBox(height: 5,),
+                const SizedBox(height: 5,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      padding: EdgeInsets.only(top: 5, right: 15, left: 15, bottom: 5),
-                      decoration: BoxDecoration(color: Color(0xFFAF40CC), borderRadius: BorderRadius.circular(5)),
+                      padding: const EdgeInsets.only(top: 5, right: 15, left: 15, bottom: 5),
+                      decoration: BoxDecoration(color: const Color(0xFFAF40CC), borderRadius: BorderRadius.circular(5)),
                       width: 160,
                       height: 56,
-                      child: Column(
+                      child: const Column(
                         children: [
                           Text(
                               "Learning Streak aktif",
@@ -222,13 +223,13 @@ class _MissionsScreenState extends State<MissionsScreen> {
                         ],
                       ),
                     ),
-                    SizedBox(width: 15,),
+                    const SizedBox(width: 15,),
                     Container(
-                      padding: EdgeInsets.only(top: 5, right: 15, left: 15, bottom: 5),
-                      decoration: BoxDecoration(color: Color(0xFFAF40CC), borderRadius: BorderRadius.circular(5)),
+                      padding: const EdgeInsets.only(top: 5, right: 15, left: 15, bottom: 5),
+                      decoration: BoxDecoration(color: const Color(0xFFAF40CC), borderRadius: BorderRadius.circular(5)),
                       width: 160,
                       height: 56,
-                      child: Column(
+                      child: const Column(
                         children: [
                           Text(
                             "Deadline Misi Terdekat",
@@ -306,9 +307,9 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                       const SizedBox(height: 4),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width*0.49,
-                                        child: Row(
+                                        child: const Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               "Kategori : ",
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -318,7 +319,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                             ),
-                                            const Text(
+                                            Text(
                                               "Sains Komputer",
                                               style: TextStyle(
                                                 color: Color(0xFFF2D049),
@@ -331,8 +332,8 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 5,),
-                                      Container(
+                                      const SizedBox(height: 5,),
+                                      SizedBox(
                                         width: MediaQuery.of(context).size.width*0.49,
                                         child: const Text(
                                           "2 / 7 Materi Terselesaikan",
@@ -348,16 +349,14 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                       const SizedBox(height: 3),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width*0.49,
-                                        child: Row(
+                                        child: const Row(
                                           children: [
-                                            Container(
-                                              child: Icon(
-                                                Icons.star,
-                                                size: 16,
-                                                color: Color(0xFFF2D049),
-                                              ),
+                                            Icon(
+                                              Icons.star,
+                                              size: 16,
+                                              color: Color(0xFFF2D049),
                                             ),
-                                            const Text(
+                                            Text(
                                               " + 1.430 XP",
                                               style: TextStyle(
                                                 color: Color(0xFFF2D049),
@@ -372,21 +371,21 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          SizedBox(width: 105,),
-                                          Container(
+                                          const SizedBox(width: 105,),
+                                          SizedBox(
                                             width: 99,
                                             height: 25,
                                             child: ElevatedButton(
                                               onPressed: () {},
-                                              child: Text("AKTIF"),
                                               style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Color(0xffEEF1FF),
-                                                  foregroundColor: Color(0xff5271FF),
-                                                  textStyle: TextStyle(
+                                                  backgroundColor: const Color(0xffEEF1FF),
+                                                  foregroundColor: const Color(0xff5271FF),
+                                                  textStyle: const TextStyle(
                                                       fontSize: 13,
                                                       fontWeight: FontWeight.bold
                                                   ),
                                               ),
+                                              child: const Text("AKTIF"),
                                             ),
                                           ),
                                         ],
@@ -419,7 +418,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                               child: Row(
                                 children: [
                                   Image.asset(
-                                    "images/loop-mission1.png",
+                                    "images/Mission-2.png",
                                     width: 100,
                                     height: 120,
                                   ),
@@ -429,7 +428,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       const Text(
-                                        "Belajar Looping dalam Python",
+                                        "Selesaikan 3 pelajaran Seni",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -439,9 +438,9 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                       const SizedBox(height: 4),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width*0.49,
-                                        child: Row(
+                                        child: const Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               "Kategori : ",
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -451,8 +450,8 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                             ),
-                                            const Text(
-                                              "Sains Komputer",
+                                            Text(
+                                              "Seni",
                                               style: TextStyle(
                                                 color: Color(0xFFF2D049),
                                                 fontWeight: FontWeight.bold,
@@ -464,11 +463,11 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 5,),
-                                      Container(
+                                      const SizedBox(height: 5,),
+                                      SizedBox(
                                         width: MediaQuery.of(context).size.width*0.49,
                                         child: const Text(
-                                          "2 / 7 Materi Terselesaikan",
+                                          "0 / 7 Materi Terselesaikan",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w400,
@@ -481,17 +480,15 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                       const SizedBox(height: 3),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width*0.49,
-                                        child: Row(
+                                        child: const Row(
                                           children: [
-                                            Container(
-                                              child: Icon(
-                                                Icons.star,
-                                                size: 16,
-                                                color: Color(0xFFF2D049),
-                                              ),
+                                            Icon(
+                                              Icons.star,
+                                              size: 16,
+                                              color: Color(0xFFF2D049),
                                             ),
-                                            const Text(
-                                              " + 1.430 XP",
+                                            Text(
+                                              " + 1.360 XP",
                                               style: TextStyle(
                                                 color: Color(0xFFF2D049),
                                                 fontWeight: FontWeight.w700,
@@ -505,21 +502,21 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          SizedBox(width: 105,),
-                                          Container(
+                                          const SizedBox(width: 105,),
+                                          SizedBox(
                                             width: 99,
                                             height: 25,
                                             child: ElevatedButton(
                                               onPressed: () {},
-                                              child: Text("BARU"),
                                               style: ElevatedButton.styleFrom(
-                                                backgroundColor: Color(0xffFFFCEF),
-                                                foregroundColor: Color(0xffF2D049),
-                                                textStyle: TextStyle(
+                                                backgroundColor: const Color(0xffFFFCEF),
+                                                foregroundColor: const Color(0xffF2D049),
+                                                textStyle: const TextStyle(
                                                   fontSize: 13,
                                                   fontWeight: FontWeight.bold
                                                 ),
                                               ),
+                                              child: const Text("BARU"),
                                             ),
                                           ),
                                         ],
@@ -552,7 +549,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                               child: Row(
                                 children: [
                                   Image.asset(
-                                    "images/loop-mission1.png",
+                                    "images/Mission-3.png",
                                     width: 100,
                                     height: 120,
                                   ),
@@ -562,7 +559,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
                                       const Text(
-                                        "Belajar Looping dalam Python",
+                                        "Selesaikan 3 tantangan hari ini",
                                         style: TextStyle(
                                           color: Colors.white,
                                           fontWeight: FontWeight.bold,
@@ -572,9 +569,9 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                       const SizedBox(height: 4),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width*0.49,
-                                        child: Row(
+                                        child: const Row(
                                           children: [
-                                            const Text(
+                                            Text(
                                               "Kategori : ",
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -584,8 +581,8 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                               overflow: TextOverflow.ellipsis,
                                               maxLines: 1,
                                             ),
-                                            const Text(
-                                              "Sains Komputer",
+                                            Text(
+                                              "Semua kategori",
                                               style: TextStyle(
                                                 color: Color(0xFFF2D049),
                                                 fontWeight: FontWeight.bold,
@@ -597,11 +594,11 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                           ],
                                         ),
                                       ),
-                                      SizedBox(height: 5,),
-                                      Container(
+                                      const SizedBox(height: 5,),
+                                      SizedBox(
                                         width: MediaQuery.of(context).size.width*0.49,
                                         child: const Text(
-                                          "2 / 7 Materi Terselesaikan",
+                                          "7 / 7 Materi Terselesaikan",
                                           style: TextStyle(
                                             color: Colors.white,
                                             fontWeight: FontWeight.w400,
@@ -614,17 +611,15 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                       const SizedBox(height: 3),
                                       SizedBox(
                                         width: MediaQuery.of(context).size.width*0.49,
-                                        child: Row(
+                                        child: const Row(
                                           children: [
-                                            Container(
-                                              child: Icon(
-                                                Icons.star,
-                                                size: 16,
-                                                color: Color(0xFFF2D049),
-                                              ),
+                                            Icon(
+                                              Icons.star,
+                                              size: 16,
+                                              color: Color(0xFFF2D049),
                                             ),
-                                            const Text(
-                                              " + 1.430 XP",
+                                            Text(
+                                              " + 1.200 XP",
                                               style: TextStyle(
                                                 color: Color(0xFFF2D049),
                                                 fontWeight: FontWeight.w700,
@@ -638,21 +633,21 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                       ),
                                       Row(
                                         children: [
-                                          SizedBox(width: 105,),
-                                          Container(
+                                          const SizedBox(width: 105,),
+                                          SizedBox(
                                             width: 99,
                                             height: 25,
                                             child: ElevatedButton(
                                               onPressed: () {},
-                                              child: Text("SELESAI"),
                                               style: ElevatedButton.styleFrom(
-                                                  backgroundColor: Color(0xffEFFAEB),
-                                                  foregroundColor: Color(0xff60E932),
-                                                  textStyle: TextStyle(
+                                                  backgroundColor: const Color(0xffEFFAEB),
+                                                  foregroundColor: const Color(0xff60E932),
+                                                  textStyle: const TextStyle(
                                                       fontSize: 13,
                                                       fontWeight: FontWeight.bold
                                                   ),
                                               ),
+                                              child: const Text("SELESAI"),
                                             ),
                                           ),
                                         ],
@@ -668,8 +663,8 @@ class _MissionsScreenState extends State<MissionsScreen> {
                   )
                 ],
               ),
-              SizedBox(height: 2,),
-              Text(
+              const SizedBox(height: 2,),
+              const Text(
                 "Terus lanjutkan belajarnya! Tinggal 3 misi lagi sebelum kamu mencapai Level 28, lho!",
                 style: TextStyle(
                   fontSize: 8.25,
@@ -701,8 +696,8 @@ class _MissionsScreenState extends State<MissionsScreen> {
                     ), ),
                 ],
               ),
-              SizedBox(height: 2,),
-              Text(
+              const SizedBox(height: 2,),
+              const Text(
                 "Level 27",
                 style: TextStyle(
                     fontSize: 10.5,

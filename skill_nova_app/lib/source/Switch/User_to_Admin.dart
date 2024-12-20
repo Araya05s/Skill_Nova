@@ -4,7 +4,10 @@ import 'package:skill_nova_app/source/homepage.dart';
 import 'package:skill_nova_app/source/Admin/Admin_homepage.dart';
 
 class UsertoAdmin extends StatelessWidget {
-  const UsertoAdmin({super.key});
+
+  final bool isAdminMode;
+
+  const UsertoAdmin({super.key, required this.isAdminMode});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class UsertoAdmin extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "Mau berpindah ke mode admin?",
+              isAdminMode ? "Mau berpindah ke modul user?" : "Mau berpindah ke modul admin?",
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.w600,
@@ -32,11 +35,11 @@ class UsertoAdmin extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Admin_HomePage()),
+                    MaterialPageRoute(builder: (context) => isAdminMode ? HomePage() : Admin_HomePage()),
                   );
                 },
                 child: Text(
-                  "Pindah Sekarang!",
+                  isAdminMode ? "Balik ke Modul User" : "Pindah Sekarang!",
                   style: TextStyle(
                     color: Colors.white
                   ),
@@ -62,13 +65,10 @@ class UsertoAdmin extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10)
                 ),
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HomePage()),
-                  );
+                  Navigator.pop(context);
                 },
                 child: Text(
-                  "Balik ke User",
+                  isAdminMode ? "Tetap di Mode Admin" : "Tetap di Modul User",
                   style: TextStyle(
                       color: Colors.black87
                   ),

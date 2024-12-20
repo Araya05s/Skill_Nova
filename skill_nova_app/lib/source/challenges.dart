@@ -93,7 +93,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const UsertoAdmin()),
+                                MaterialPageRoute(builder: (context) => const UsertoAdmin(isAdminMode: false,)),
                               );
                             },
                             child: Column(

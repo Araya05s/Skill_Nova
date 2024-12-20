@@ -143,7 +143,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const UsertoAdmin()),
+                                MaterialPageRoute(builder: (context) => const UsertoAdmin(isAdminMode: false,)),
                               );
                             },
                             child: Column(

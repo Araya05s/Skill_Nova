@@ -18,9 +18,9 @@ class Admin_BottomNavBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       items: const [
         BottomNavigationBarItem(
-            label: "Home",
+            label: "Course Categories",
             icon: Icon(
-              Icons.home_filled,
+              Icons.category_rounded,
 
               size: 40,
             )

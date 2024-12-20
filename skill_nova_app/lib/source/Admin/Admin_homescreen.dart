@@ -10,6 +10,14 @@ class Admin_HomeScreen extends StatefulWidget {
 class _Admin_HomeScreenState extends State<Admin_HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Course Categories List'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(Icons.add),
+      ),
+    );
   }
 }

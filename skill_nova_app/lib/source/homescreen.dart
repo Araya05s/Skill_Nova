@@ -111,7 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             onTap: (){
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const UsertoAdmin()),
+                                MaterialPageRoute(builder: (context) => const UsertoAdmin(isAdminMode: false)),
                               );
                             },
                             child: Column(

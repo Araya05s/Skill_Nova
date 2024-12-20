@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:skill_nova_app/source/Switch/User_to_Admin.dart';
+
 class ChallengesScreen extends StatefulWidget {
   const ChallengesScreen({super.key});
 
@@ -87,49 +89,57 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                               const SizedBox(height: 20,),
                             ],
                           ),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                              Image.asset("images/Profile.png", width: 69, height: 69,),
-                              const Text(
-                                "David Hamilton",
-                                style: TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 14
-                                ),
-                              ),
-                              const Text(
-                                "Level 27",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                ),
-                              ),
-                              Stack(
-                                children: <Widget>[
-                                  SizedBox(
-                                    width: 100,
-                                    height: 15,
-                                    child: LinearProgressIndicator(
-                                      backgroundColor: const Color(0xffD9D9D9),
-                                      valueColor: const AlwaysStoppedAnimation(Color(0xff5271FF)),
-                                      value: Value,
-                                      borderRadius: BorderRadius.circular(20),
-                                    ),
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(builder: (context) => const UsertoAdmin()),
+                              );
+                            },
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Image.asset("images/Profile.png", width: 69, height: 69,),
+                                const Text(
+                                  "David Hamilton",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 14
                                   ),
-                                  const Align(
-                                    widthFactor: 1.40, alignment: Alignment.topCenter,
-                                    child: Text("14.4K / 20K XP",
-                                      style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.bold,
-                                          color: Color(0xff782A8C)
+                                ),
+                                const Text(
+                                  "Level 27",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                  ),
+                                ),
+                                Stack(
+                                  children: <Widget>[
+                                    SizedBox(
+                                      width: 100,
+                                      height: 15,
+                                      child: LinearProgressIndicator(
+                                        backgroundColor: const Color(0xffD9D9D9),
+                                        valueColor: const AlwaysStoppedAnimation(Color(0xff5271FF)),
+                                        value: Value,
+                                        borderRadius: BorderRadius.circular(20),
                                       ),
-                                    ), ),
-                                ],
-                              ),
-                              const SizedBox(height: 6),
-                            ],
+                                    ),
+                                    const Align(
+                                      widthFactor: 1.40, alignment: Alignment.topCenter,
+                                      child: Text("14.4K / 20K XP",
+                                        style: TextStyle(
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xff782A8C)
+                                        ),
+                                      ), ),
+                                  ],
+                                ),
+                                const SizedBox(height: 6),
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -215,7 +225,8 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Container(
-                            padding: const EdgeInsets.only(right: 223),
+                          width: MediaQuery.of(context).size.width,
+                            margin: const EdgeInsets.only(top: 2, right: 30, left: 30),
                             child: const Text(
                               "Tantangan Baru",
                               style: TextStyle(

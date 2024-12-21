@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:skill_nova_app/database/skillnova_database.dart';
 import 'package:skill_nova_app/models/course_category.dart';
 import 'package:skill_nova_app/source/Adder/Adding_Category.dart';
+import 'package:skill_nova_app/source/Switch/User_to_Admin.dart';
 import 'package:skill_nova_app/source/widgets/course_category_list_tile.dart';
 
 class Admin_HomeScreen extends StatefulWidget {
@@ -41,6 +42,21 @@ class _Admin_HomeScreenState extends State<Admin_HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Course Categories List'),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const UsertoAdmin(
+                  isAdminMode: true
+                ),
+              ),
+            );
+          },
+          child: const Icon(
+            Icons.arrow_back,
+          )
+        ),
       ),
       body: isLoading
           ? const Center(

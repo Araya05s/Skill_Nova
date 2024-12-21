@@ -14,7 +14,7 @@ class SkillNovaDatabase {
   static Database? _database;
 
   Future<Database> get database async {
-    if (_database != null) return _database!;
+    if (_database != null && _database!.isOpen) return _database!;
     _database = await _initDatabase();
     return _database!;
   }
@@ -76,7 +76,10 @@ class SkillNovaDatabase {
   Future<List<CourseCategory>> readAllCourseCategories() async {
     final db = await instance.database;
     const orderBy = '${CourseCategoryFields.title} ASC';
-    final result = await db.query(courseCategoriesTable, orderBy: orderBy);
+    final result = await db.query(
+      courseCategoriesTable, 
+      orderBy: orderBy
+    );
     return result.map((CourseCategoryData) => CourseCategory.fromMap(CourseCategoryData)).toList();
   }
 

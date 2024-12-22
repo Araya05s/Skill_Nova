@@ -267,7 +267,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     mainAxisSize: MainAxisSize.min,
                                                     children: [
-                                                      Container(
+                                                      SizedBox(
                                                         width: MediaQuery.of(context).size.width * 0.5,
                                                         child: Text(
                                                           "LOOP DI PHYTON",
@@ -423,7 +423,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     mainAxisSize: MainAxisSize.min,
                                                     children: [
-                                                      Container(
+                                                      SizedBox(
                                                         width: MediaQuery.of(context).size.width * 0.5,
                                                         child: Text(
                                                           "TIPE-TIPE KUAS",
@@ -579,7 +579,7 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                     crossAxisAlignment: CrossAxisAlignment.start,
                                                     mainAxisSize: MainAxisSize.min,
                                                     children: [
-                                                      Container(
+                                                      SizedBox(
                                                         width: MediaQuery.of(context).size.width * 0.5,
                                                         child: Text(
                                                           "DAILY CONVERSATION",

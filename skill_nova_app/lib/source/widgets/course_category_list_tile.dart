@@ -9,6 +9,7 @@ class CourseCategoryListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final File courseCategoryImage = File(courseCategory.image);
 
     return Stack(

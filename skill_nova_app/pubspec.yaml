@@ -39,6 +39,8 @@ dependencies:
   intl: ^0.20.1
   file_picker: ^8.1.6
   path_provider: ^2.1.5
+  duration: ^4.0.3
+  provider: ^6.1.2
 
 dev_dependencies:
   flutter_test:

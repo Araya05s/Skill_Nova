@@ -235,7 +235,6 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
     return null;
   }
 
-
   /// Builds the UI for adding a new course category, including input fields for
   /// title, skills, tags, certificate type, duration, and image selection.
   /// Provides functionality to validate and submit the form to add a new course
@@ -249,7 +248,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
         title: Text(widget.courseCategory != null
             ? 'Update Course Category'
             : 'Add A New Course Category'),
-        actions: [
+        actions: widget.courseCategory != null ? [
           IconButton(
             onPressed: () async {
               await SkillNovaDatabase.instance.deleteCourseCategory(
@@ -262,7 +261,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
               color: Colors.red,
             ),
           ),
-        ],
+        ] : [],
       ),
       body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(

@@ -9,6 +9,7 @@ class CourseCategoryListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final File courseCategoryImage = File(courseCategory.image);
 
     return Stack(
@@ -64,7 +65,7 @@ class CourseCategoryListTile extends StatelessWidget {
                           ),
                           const SizedBox(height: 4),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.49,
+                            width: MediaQuery.of(context).size.width * 0.32,
                             child: const Text(
                               "Skills yang didapat: ",
                               style: TextStyle(
@@ -73,11 +74,11 @@ class CourseCategoryListTile extends StatelessWidget {
                                 fontSize: 10,
                               ),
                               overflow: TextOverflow.ellipsis,
-                              maxLines: 1,
+                              maxLines: 2,
                             ),
                           ),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.49,
+                            width: MediaQuery.of(context).size.width * 0.32,
                             child: Text(
                               courseCategory.skills.join(', '),
                               style: const TextStyle(
@@ -91,7 +92,7 @@ class CourseCategoryListTile extends StatelessWidget {
                           ),
                           const SizedBox(height: 6),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.49,
+                            width: MediaQuery.of(context).size.width * 0.32,
                             child: Text(
                               "${courseCategory.tags[0]}, ${courseCategory.certificateType} Certificate, ${courseCategory.getDuration()}",
                               style: TextStyle(
@@ -105,7 +106,7 @@ class CourseCategoryListTile extends StatelessWidget {
                           ),
                           const SizedBox(height: 15),
                           SizedBox(
-                            width: MediaQuery.of(context).size.width * 0.49,
+                            width: MediaQuery.of(context).size.width * 0.32,
                             child: Text(
                               courseCategory.tags.sublist(1).join(', '),
                               style: TextStyle(

@@ -123,29 +123,29 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
   }
 
   Future<void> addCourseCategory() async {
+    _lowerYearsController.text =
+        _lowerYearsController.text.isEmpty ? '0' : _lowerYearsController.text;
+    _lowerMonthsController.text =
+        _lowerMonthsController.text.isEmpty ? '0' : _lowerMonthsController.text;
+    _lowerDaysController.text =
+        _lowerDaysController.text.isEmpty ? '0' : _lowerDaysController.text;
     final courseCategory = CourseCategory(
         title: _titleController.text,
         skills: _skills,
         lowerDuration: CustomDuration(
-          years: int.parse(_lowerYearsController.text.isEmpty
-              ? '0'
-              : _lowerYearsController.text),
-          months: int.parse(_lowerMonthsController.text.isEmpty
-              ? '0'
-              : _lowerMonthsController.text),
-          days: int.parse(_lowerDaysController.text.isEmpty
-              ? '0'
-              : _lowerDaysController.text),
+          years: int.parse(_lowerYearsController.text),
+          months: int.parse(_lowerMonthsController.text),
+          days: int.parse(_lowerDaysController.text),
         ),
         upperDuration: CustomDuration(
           years: int.parse(_upperYearsController.text.isEmpty
-              ? '0'
+              ? _lowerYearsController.text
               : _upperYearsController.text),
           months: int.parse(_upperMonthsController.text.isEmpty
-              ? '0'
+              ? _lowerMonthsController.text
               : _upperMonthsController.text),
           days: int.parse(_upperDaysController.text.isEmpty
-              ? '0'
+              ? _lowerDaysController.text
               : _upperDaysController.text),
         ),
         certificateType: _certificateType ?? 'Unspecified',
@@ -156,29 +156,29 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
   }
 
   Future<void> updateCourseCategory() async {
+    _lowerYearsController.text =
+        _lowerYearsController.text.isEmpty ? '0' : _lowerYearsController.text;
+    _lowerMonthsController.text =
+        _lowerMonthsController.text.isEmpty ? '0' : _lowerMonthsController.text;
+    _lowerDaysController.text =
+        _lowerDaysController.text.isEmpty ? '0' : _lowerDaysController.text;
     final courseCategory = widget.courseCategory!.copy(
         title: _titleController.text,
         skills: _skills,
         lowerDuration: CustomDuration(
-          years: int.parse(_lowerYearsController.text.isEmpty
-              ? '0'
-              : _lowerYearsController.text),
-          months: int.parse(_lowerMonthsController.text.isEmpty
-              ? '0'
-              : _lowerMonthsController.text),
-          days: int.parse(_lowerDaysController.text.isEmpty
-              ? '0'
-              : _lowerDaysController.text),
+          years: int.parse(_lowerYearsController.text),
+          months: int.parse(_lowerMonthsController.text),
+          days: int.parse(_lowerDaysController.text),
         ),
         upperDuration: CustomDuration(
           years: int.parse(_upperYearsController.text.isEmpty
-              ? '0'
+              ? _lowerYearsController.text
               : _upperYearsController.text),
           months: int.parse(_upperMonthsController.text.isEmpty
-              ? '0'
+              ? _lowerMonthsController.text
               : _upperMonthsController.text),
           days: int.parse(_upperDaysController.text.isEmpty
-              ? '0'
+              ? _lowerDaysController.text
               : _upperDaysController.text),
         ),
         certificateType: _certificateType ?? 'Unspecified',
@@ -205,7 +205,12 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
             : 'Add A New Course Category'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () async {
+              await SkillNovaDatabase.instance.deleteCourseCategory(
+                widget.courseCategory!.id!,
+              );
+              Navigator.of(context).pop();
+            },
             icon: const Icon(
               Icons.delete,
               color: Colors.red,
@@ -410,7 +415,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                                 if (newValue.text.isNotEmpty &&
                                     int.tryParse(newValue.text) != null) {
                                   final value = int.parse(newValue.text);
-                                  if (value < 0 || value > 31) {
+                                  if (value < 0 || value > 30) {
                                     return oldValue;
                                   }
                                 }
@@ -439,6 +444,14 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                               border: OutlineInputBorder(),
                             ),
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              /*MaxDurationFormatter(
+                                  lowerYearsController: _lowerYearsController,
+                                  lowerMonthsController: _lowerMonthsController,
+                                  lowerDaysController: _lowerDaysController,
+                                  unit: 'year')*/
+                            ],
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -450,6 +463,26 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                               border: OutlineInputBorder(),
                             ),
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                              TextInputFormatter.withFunction(
+                                  (oldValue, newValue) {
+                                if (newValue.text.isNotEmpty &&
+                                    int.tryParse(newValue.text) != null) {
+                                  final value = int.parse(newValue.text);
+                                  if (value < 0 || value > 12) {
+                                    return oldValue;
+                                  }
+                                }
+                                return newValue;
+                              }),
+                              /*MaxDurationFormatter(
+                                  lowerYearsController: _lowerYearsController,
+                                  lowerMonthsController: _lowerMonthsController,
+                                  lowerDaysController: _lowerDaysController,
+                                  unit: 'month')*/
+                            ],
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -461,6 +494,26 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                               border: OutlineInputBorder(),
                             ),
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.digitsOnly,
+                              LengthLimitingTextInputFormatter(2),
+                              TextInputFormatter.withFunction(
+                                  (oldValue, newValue) {
+                                if (newValue.text.isNotEmpty &&
+                                    int.tryParse(newValue.text) != null) {
+                                  final value = int.parse(newValue.text);
+                                  if (value < 0 || value > 30) {
+                                    return oldValue;
+                                  }
+                                }
+                                return newValue;
+                              }),
+                              /*MaxDurationFormatter(
+                                  lowerYearsController: _lowerYearsController,
+                                  lowerMonthsController: _lowerMonthsController,
+                                  lowerDaysController: _lowerDaysController,
+                                  unit: 'day')*/
+                            ],
                           ),
                         ),
                       ],

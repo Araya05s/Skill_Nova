@@ -10,7 +10,8 @@ class CustomDuration {
     this.years = 0,
     this.months = 0,
     this.days = 0,
-  });
+  }) : assert(years >= 0 && months >= 0 && days >= 0,
+            'Durations cannot be negative');
 
   static CustomDuration fromString(String durationString) {
     // Initialize variables for years, months, and days
@@ -60,6 +61,13 @@ class CustomDuration {
     );
   }
 
+  String toStringTopper() {
+    if (years > 0) return '$years years';
+    if (months > 0) return '$months months';
+    if (days > 0) return '$days days';
+    return '0 days';
+  }
+
   Map<String, dynamic> toJson() {
     return {
       'years': years,
@@ -67,4 +75,12 @@ class CustomDuration {
       'days': days,
     };
   }
+
+  int toDays() {
+    return years * 365 + months * 30 + days;
+  }
+
+  /// Comparison operators.
+  bool operator >(CustomDuration other) => toDays() > other.toDays();
+  bool operator <(CustomDuration other) => toDays() < other.toDays();
 }

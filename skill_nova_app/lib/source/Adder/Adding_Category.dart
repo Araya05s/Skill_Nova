@@ -38,6 +38,9 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
   late final TextEditingController _upperMonthsController;
   late final TextEditingController _upperDaysController;
 
+  bool _skillsValidated = false;
+  bool _tagsValidated = false;
+
   @override
   void initState() {
     _titleController = TextEditingController();
@@ -117,7 +120,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-            content: Text('No image file selected for this course category.')),
+            content: Text('Image file selection cancelled for this course category.')),
       );
     }
   }
@@ -188,7 +191,50 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
     await SkillNovaDatabase.instance.updateCourseCategory(courseCategory);
   }
 
-  @override
+  String? _validateMinimumDuration(String? value, String label) {
+    if (value == null || value.isEmpty) {
+      return 'Please provide a value for $label.';
+    }
+    if (int.tryParse(value) == null || int.parse(value) < 0) {
+      return '$label must be a non-negative number.';
+    }
+    return null;
+  }
+
+  String? _validateMaximumDuration(String? value, String label) {
+    if (value != null && value.isNotEmpty) {
+      if (int.tryParse(value) == null || int.parse(value) < 0) {
+        return '$label must be a non-negative number.';
+      }
+
+      final int minYears = int.parse(_lowerYearsController.text.isEmpty
+          ? '0'
+          : _lowerYearsController.text);
+      final int minMonths = int.parse(_lowerMonthsController.text.isEmpty
+          ? '0'
+          : _lowerMonthsController.text);
+      final int minDays = int.parse(
+          _lowerDaysController.text.isEmpty ? '0' : _lowerDaysController.text);
+
+      final int maxYears = int.parse(_upperYearsController.text.isEmpty
+          ? '0'
+          : _upperYearsController.text);
+      final int maxMonths = int.parse(_upperMonthsController.text.isEmpty
+          ? '0'
+          : _upperMonthsController.text);
+      final int maxDays = int.parse(
+          _upperDaysController.text.isEmpty ? '0' : _upperDaysController.text);
+
+      final int totalMinDays = (minYears * 365) + (minMonths * 30) + minDays;
+      final int totalMaxDays = (maxYears * 365) + (maxMonths * 30) + maxDays;
+
+      if (totalMaxDays < totalMinDays) {
+        return 'Maximum duration cannot be less than the minimum duration.';
+      }
+    }
+    return null;
+  }
+
 
   /// Builds the UI for adding a new course category, including input fields for
   /// title, skills, tags, certificate type, duration, and image selection.
@@ -196,7 +242,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
   /// category to the database. Displays the selected image and allows its removal.
   /// Includes an AppBar with a delete icon, a scrollable form, and a button to
   /// add the course category.
-
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -275,8 +321,11 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                           _skillController.clear();
                         }
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Add a skill',
+                        errorText: _skillsValidated
+                            ? "Please add at least one skill"
+                            : null,
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -315,8 +364,11 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                           _tagController.clear();
                         }
                       },
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         labelText: 'Add a tag',
+                        errorText: _tagsValidated
+                            ? "Please add at least one tag"
+                            : null,
                         border: OutlineInputBorder(),
                       ),
                     ),
@@ -370,6 +422,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                             inputFormatters: [
                               FilteringTextInputFormatter.digitsOnly,
                             ],
+                            validator: (value) => _validateMinimumDuration(value, 'Minimum Years')
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -396,6 +449,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                                 return newValue;
                               })
                             ],
+                            validator: (value) => _validateMinimumDuration(value, 'Minimum Months')
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -422,6 +476,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                                 return newValue;
                               })
                             ],
+                            validator: (value) => _validateMinimumDuration(value, 'Minimum Days'),
                           ),
                         ),
                       ],
@@ -452,6 +507,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                                   lowerDaysController: _lowerDaysController,
                                   unit: 'year')*/
                             ],
+                            validator: (value) => _validateMaximumDuration(value, 'Maximum Years'),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -483,6 +539,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                                   lowerDaysController: _lowerDaysController,
                                   unit: 'month')*/
                             ],
+                            validator: (value) => _validateMaximumDuration(value, 'Maximum Months'),
                           ),
                         ),
                         const SizedBox(width: 8),
@@ -514,6 +571,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                                   lowerDaysController: _lowerDaysController,
                                   unit: 'day')*/
                             ],
+                            validator: (value) => _validateMaximumDuration(value, 'Maximum Days'),
                           ),
                         ),
                       ],
@@ -532,6 +590,12 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                       onPressed: _pickAndCopyImage,
                     ),
                   ),
+                  validator: (value) {
+                    if (value!.isEmpty && _selectedImage == null) {
+                      return 'Please select an image file for this course category.';
+                    }
+                    return null;
+                  },
                 ),
                 const SizedBox(height: 20),
                 _selectedImage != null
@@ -569,7 +633,12 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
   }
 
   Future<void> addUpdateCourseCategory() async {
-    if (_formKey.currentState!.validate()) {
+    setState(() => _skillsValidated = _skills.isEmpty);
+    setState(() => _tagsValidated = _tags.isEmpty);
+
+    if (_formKey.currentState!.validate() &&
+        !_tagsValidated &&
+       !_skillsValidated) {
       _formKey.currentState!.save();
 
       final isUpdating = widget.courseCategory != null;

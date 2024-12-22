@@ -53,19 +53,25 @@ class CustomDuration {
     return parts.isNotEmpty ? parts.join(' ') : '0 days';
   }
 
+  String toStringTopper() {
+    if (years > 0) return '$years year${years > 1 ? 's' : ''}';
+    if (months > 0) return '$months month${months > 1 ? 's' : ''}';
+    if (days > 0) return '$days day${days > 1 ? 's' : ''}';
+    return '0 days';
+  }
+
+  String getTopDurationUnit() {
+    if (years > 0) return 'year';
+    if (months > 0) return 'month';
+    return 'day';
+  }
+
   factory CustomDuration.fromJson(Map<String, dynamic> json) {
     return CustomDuration(
       years: json['years'] ?? 0,
       months: json['months'] ?? 0,
       days: json['days'] ?? 0,
     );
-  }
-
-  String toStringTopper() {
-    if (years > 0) return '$years years';
-    if (months > 0) return '$months months';
-    if (days > 0) return '$days days';
-    return '0 days';
   }
 
   Map<String, dynamic> toJson() {

@@ -43,12 +43,11 @@ class CourseCategoryListTile extends StatelessWidget {
                           ],
                         ),
                         child: ClipRRect(
-                          borderRadius: BorderRadius.circular(5),
-                          child: Image.file(
-                                  courseCategoryImage,
-                                  fit: BoxFit.cover,
-                                )
-                        ),
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.file(
+                              courseCategoryImage,
+                              fit: BoxFit.cover,
+                            )),
                       ),
                       const SizedBox(width: 6),
                       Column(
@@ -93,8 +92,22 @@ class CourseCategoryListTile extends StatelessWidget {
                           const SizedBox(height: 6),
                           SizedBox(
                             width: MediaQuery.of(context).size.width * 0.49,
-                            child: const Text(
-                              "Test",
+                            child: Text(
+                              "${courseCategory.tags[0]}, ${courseCategory.certificateType} Certificate, ${courseCategory.getDuration()}",
+                              style: TextStyle(
+                                color: Color(0xffD9D9D9),
+                                fontWeight: FontWeight.w400,
+                                fontSize: 10,
+                              ),
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 4,
+                            ),
+                          ),
+                          const SizedBox(height: 15),
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.49,
+                            child: Text(
+                              courseCategory.tags.sublist(1).join(', '),
                               style: TextStyle(
                                 color: Color(0xffD9D9D9),
                                 fontWeight: FontWeight.w400,

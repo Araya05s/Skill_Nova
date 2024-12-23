@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skill_nova_app/database/skillnova_database.dart';
 import 'package:skill_nova_app/models/challenge.dart';
-
 import 'package:skill_nova_app/source/Switch/User_to_Admin.dart';
 import 'package:skill_nova_app/source/widgets/user_challenge_list_tile.dart';
+import 'package:skill_nova_app/source/homepage.dart';
 
 class ChallengesScreen extends StatefulWidget {
   const ChallengesScreen({super.key});
@@ -20,7 +20,8 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
 
   Future<void> getAllChallenges() async {
     setState(() => isLoading = true);
-    challenges = await SkillNovaDatabase.instance.readAllChallenges(onlyIsActive: true);
+    challenges =
+        await SkillNovaDatabase.instance.readAllChallenges(onlyIsActive: true);
     for (final courseCategory
         in await SkillNovaDatabase.instance.readAllCourseCategories()) {
       courseCategoriesIdToNameMap[courseCategory.id] = courseCategory.title;
@@ -110,11 +111,17 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(12.5),
                                                 color: Colors.white),
-                                            child: const Icon(
-                                              Icons.arrow_back,
-                                              color: Colors.black,
-                                              size: 30,
-                                            )),
+                                            child: IconButton(
+                                              icon: const Icon(
+                                                Icons.arrow_back,
+                                                color: Colors.black,
+                                                size: 30,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(selectedIndex: 0,)));
+                                              },
+                                            ),
+                                          ),
                                         SizedBox(
                                           width: MediaQuery.of(context)
                                                   .size
@@ -318,19 +325,14 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
                           Container(
                               width: MediaQuery.of(context).size.width,
                               margin: const EdgeInsets.only(
-                                  top: 2, 
-                                  right: 30, 
-                                  left: 30
-                              ),
+                                  top: 2, right: 30, left: 30),
                               child: const Text(
                                 "Tantangan Baru",
                                 style: TextStyle(
                                     color: Colors.black,
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 16
-                                ),
-                              )
-                          ),
+                                    fontSize: 16),
+                              )),
                         ],
                       ),
                     ],
@@ -343,9 +345,9 @@ class _ChallengesScreenState extends State<ChallengesScreen> {
               left: 0,
               right: 0,
               bottom: 50,
-              child: isLoading ? const Center(
-                child: CircularProgressIndicator() 
-              ) : _buildChallengesList(),
+              child: isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : _buildChallengesList(),
             ),
             Positioned(
               bottom: 0,

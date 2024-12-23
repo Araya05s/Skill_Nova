@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:skill_nova_app/database/skillnova_database.dart';
 import 'package:skill_nova_app/models/mission.dart';
-
 import 'package:skill_nova_app/source/Switch/User_to_Admin.dart';
+import 'package:skill_nova_app/source/homepage.dart';
 import 'package:skill_nova_app/source/widgets/user_mission_list_tile.dart';
 
 class MissionsScreen extends StatefulWidget {
@@ -103,11 +103,17 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(12.5),
                                                 color: Colors.white),
-                                            child: const Icon(
-                                              Icons.arrow_back,
-                                              color: Colors.black,
-                                              size: 30,
-                                            )),
+                                            child: IconButton(
+                                              icon: const Icon(
+                                                Icons.arrow_back,
+                                                color: Colors.black,
+                                                size: 30,
+                                              ),
+                                              onPressed: () {
+                                                Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage(selectedIndex: 0,)));
+                                              },
+                                            ),
+                                        ),
                                         SizedBox(
                                             width: MediaQuery.of(context)
                                                     .size

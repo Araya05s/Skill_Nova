@@ -316,7 +316,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: MediaQuery.of(context).size.width * 0.5,
                                               child: const Text(
                                                 "Belajar Looping dalam Python",
@@ -451,7 +451,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: MediaQuery.of(context).size.width * 0.5,
                                               child: const Text(
                                                 "Selesaikan 3 pelajaran Seni",
@@ -586,7 +586,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
-                                            Container(
+                                            SizedBox(
                                               width: MediaQuery.of(context).size.width * 0.5,
                                               child: const Text(
                                                 "Selesaikan 3 tantangan hari ini",

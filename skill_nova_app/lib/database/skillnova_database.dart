@@ -161,6 +161,19 @@ class SkillNovaDatabase {
     return result.map((courseCategoryData) => CourseCategory.fromMap(courseCategoryData)).toList();
   }
 
+  Future<List<CourseCategory>> searchCourseCategories(String query) async {
+    final db = await database;
+
+    // Search only by title field
+    final result = await db.query(
+      'course_categories',
+      where: 'title LIKE ?', // Search in the title field
+      whereArgs: ['%$query%'], // Partial matching for the title
+    );
+
+    return result.map((map) => CourseCategory.fromMap(map)).toList();
+  }
+
   Future<List<Mission>> readAllMissions() async {
     final db = await instance.database;
     const orderBy = '${MissionFields.id} DESC';

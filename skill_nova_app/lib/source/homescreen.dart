@@ -16,6 +16,7 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
   bool isLoading = false;
   List<CourseCategory> courseCategories = [];
 
+
   Future<void> getAllCourseCategories() async {
     setState(() => isLoading = true);
 
@@ -23,6 +24,22 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
     await SkillNovaDatabase.instance.readAllCourseCategories();
 
     setState(() => isLoading = false);
+  }
+
+  Future<void> _filterItems(String query) async {
+    if (query.isEmpty) {
+      final categorizes =
+      await SkillNovaDatabase.instance.readAllCourseCategories();
+
+      setState(() {
+      courseCategories = categorizes;
+      });
+    } else {
+      final filteredcategories = await SkillNovaDatabase.instance.searchCourseCategories(query);
+      setState(() {
+        courseCategories = filteredcategories;
+      });
+    }
   }
 
   @override
@@ -112,6 +129,7 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                                     SizedBox(
                                       height: 45,
                                       child: TextField(
+                                        onChanged: _filterItems,
                                         decoration: InputDecoration(
                                           enabledBorder: OutlineInputBorder(
                                               borderRadius:

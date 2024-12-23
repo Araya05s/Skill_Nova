@@ -31,6 +31,8 @@ class User_Course_Category extends StatelessWidget {
                       ? Image.file(
                     courseCategoryImage,
                     width: 100,
+                    height: 100,
+                    fit: BoxFit.cover,
                   )
                       : const Placeholder(
                     fallbackHeight: 100,
@@ -93,10 +95,10 @@ class User_Course_Category extends StatelessWidget {
                         ),
                       ),
                     ],
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
           ],
         ),
       ),

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 import 'package:skill_nova_app/source/Switch/User_to_Admin.dart';
 import 'package:skill_nova_app/database/skillnova_database.dart';
@@ -17,30 +16,13 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
   bool isLoading = false;
   List<CourseCategory> courseCategories = [];
 
-
   Future<void> getAllCourseCategories() async {
     setState(() => isLoading = true);
 
     courseCategories =
-        await SkillNovaDatabase.instance.readAllCourseCategories();
+    await SkillNovaDatabase.instance.readAllCourseCategories();
 
     setState(() => isLoading = false);
-  }
-
-  Future<void> _filterItems(String query) async {
-    if (query.isEmpty) {
-      final categorizes =
-      await SkillNovaDatabase.instance.readAllCourseCategories();
-
-      setState(() {
-      courseCategories = categorizes;
-      });
-    } else {
-      final filteredcategories = await SkillNovaDatabase.instance.searchCourseCategories(query);
-      setState(() {
-        courseCategories = filteredcategories;
-      });
-    }
   }
 
   @override
@@ -54,15 +36,9 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
     // SkillNovaDatabase.instance.close();
     super.dispose();
   }
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Color(0xff782A8C), // Purple color
-      statusBarIconBrightness: Brightness.light,
-    )); // White icons
-
     return Scaffold(
       body: SafeArea(
         child: Stack(
@@ -77,10 +53,12 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                     padding: const EdgeInsets.only(top: 5, left: 20, right: 10),
                     width: MediaQuery.of(context).size.width,
                     decoration: const BoxDecoration(
-                        color: Color(0xff782A8C),
-                        borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(20),
-                            bottomRight: Radius.circular(20))),
+                      color: Color(0xff782A8C),
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(20),
+                        bottomRight: Radius.circular(20),
+                      ),
+                    ),
                     height: 174,
                     child: Column(
                       children: [
@@ -94,43 +72,41 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                                 Container(
                                   padding: const EdgeInsets.all(2),
                                   decoration: BoxDecoration(
-                                      border: Border.all(),
-                                      borderRadius: BorderRadius.circular(20),
-                                      color: Colors.white),
+                                    border: Border.all(),
+                                    borderRadius: BorderRadius.circular(20),
+                                    color: Colors.white,
+                                  ),
                                   child: const Icon(
                                     Icons.notifications,
                                     color: Colors.black,
                                     size: 20,
                                   ),
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20),
                                 const Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       "Halo, David Hamilton!",
                                       style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 20),
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 20,
+                                      ),
                                     ),
                                     Text(
                                       "Apa yang ingin dipelajari hari ini?",
                                       style: TextStyle(
-                                          color: Color(0xff5271FF),
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12),
+                                        color: Color(0xff5271FF),
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 12,
+                                      ),
                                     ),
                                   ],
                                 ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
+                                const SizedBox(height: 20),
                                 SizedBox(
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.51,
+                                  width: MediaQuery.of(context).size.width * 0.51,
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -141,26 +117,28 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                                           onChanged: _filterItems,
                                           decoration: InputDecoration(
                                             enabledBorder: OutlineInputBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(20)),
+                                              borderRadius: BorderRadius.circular(20),
+                                            ),
                                             fillColor: Colors.white,
                                             filled: true,
                                             hintText:
-                                                "Cari kursus di SkillNova™.....",
+                                            "Cari kursus di SkillNova™.....",
                                             suffixIcon: Container(
                                               height: 10,
                                               decoration: const BoxDecoration(
-                                                  color: Color(0xff782A8C)),
+                                                color: Color(0xff782A8C),
+                                              ),
                                               child: const Icon(Icons.search,
                                                   color: Colors.white),
                                             ),
                                           ),
                                           style: const TextStyle(
-                                              fontSize: 12,
-                                              color: Color(0xff636363)),
+                                            fontSize: 12,
+                                            color: Color(0xff636363),
+                                          ),
                                           textAlign: TextAlign.start,
                                           textAlignVertical:
-                                              TextAlignVertical.center,
+                                          TextAlignVertical.center,
                                         ),
                                       )
                                     ],
@@ -173,8 +151,9 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => const UsertoAdmin(
-                                          isAdminMode: false)),
+                                    builder: (context) =>
+                                    const UsertoAdmin(isAdminMode: false),
+                                  ),
                                 );
                               },
                               child: Column(
@@ -202,13 +181,11 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                                         height: 15,
                                         child: LinearProgressIndicator(
                                           backgroundColor:
-                                              const Color(0xffD9D9D9),
+                                          const Color(0xffD9D9D9),
                                           valueColor:
-                                              const AlwaysStoppedAnimation(
-                                                  Color(0xff5271FF)),
+                                          const AlwaysStoppedAnimation(
+                                              Color(0xff5271FF)),
                                           value: 0.72,
-                                          borderRadius:
-                                              BorderRadius.circular(20),
                                         ),
                                       ),
                                       const Align(
@@ -217,9 +194,10 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                                         child: Text(
                                           "14.4K / 20K XP",
                                           style: TextStyle(
-                                              fontSize: 10,
-                                              fontWeight: FontWeight.bold,
-                                              color: Color(0xff782A8C)),
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.bold,
+                                            color: Color(0xff782A8C),
+                                          ),
                                         ),
                                       ),
                                     ],
@@ -230,9 +208,7 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 10),
                                   ),
-                                  const SizedBox(
-                                    height: 4,
-                                  ),
+                                  const SizedBox(height: 4),
                                   const Text(
                                     "4 / 9 misi selesai",
                                     style: TextStyle(
@@ -252,23 +228,25 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                          width: MediaQuery.of(context).size.width,
-                          margin: const EdgeInsets.only(
-                              top: 2, right: 30, left: 30),
-                          child: const Text(
-                            "Rekomendasi kategori kursus untuk kamu",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
-                          )),
+                        width: MediaQuery.of(context).size.width,
+                        margin:
+                        const EdgeInsets.only(top: 2, right: 30, left: 30),
+                        child: const Text(
+                          "Rekomendasi kursus untuk kamu",
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
             Positioned(
-              top: 220, // Adjust this value as needed
+              top: 180, // Adjust this value as needed
               left: 0,
               right: 0,
               bottom: 0, // Ensure this widget takes the remaining space
@@ -281,7 +259,6 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
       ),
     );
   }
-
   Widget _buildCourseCategoriesList() {
     return ListView.builder(
       itemCount: courseCategories.length,
@@ -290,7 +267,10 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
 
         return GestureDetector(
             onTap: () async {},
-            child: User_Course_Category(courseCategory: courseCategory));
+            child: User_Course_Category(
+                courseCategory: courseCategory
+            )
+        );
       },
     );
   }

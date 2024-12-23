@@ -30,7 +30,6 @@ class SkillNovaDatabase {
       path,
       version: _databaseVersion,
       onCreate: _createDB,
-      onUpgrade: _upgradeDB,
     );
   }
 
@@ -84,14 +83,6 @@ class SkillNovaDatabase {
         FOREIGN KEY (${ChallengeFields.categoryId}) REFERENCES $courseCategoriesTable(${CourseCategoryFields.id}) ON DELETE CASCADE ON UPDATE CASCADE
       )
       ''');
-  }
-
-  Future _upgradeDB (
-    Database db,
-    int oldVersion,
-    int newVersion,
-  ) async {
-
   }
 
   Future<CourseCategory> createCourseCategory(CourseCategory courseCategory) async {
@@ -170,42 +161,23 @@ class SkillNovaDatabase {
     return result.map((courseCategoryData) => CourseCategory.fromMap(courseCategoryData)).toList();
   }
 
-  Future<List<CourseCategory>> searchCourseCategories(String query) async {
-    final db = await database;
-
-    // Search only by title field
-    final result = await db.query(
-      'course_categories',
-      where: 'title LIKE ?', // Search in the title field
-      whereArgs: ['%$query%'], // Partial matching for the title
-    );
-
-    return result.map((map) => CourseCategory.fromMap(map)).toList();
-  }
-
-  Future<List<Mission>> readAllMissions({bool onlyIsActive = false}) async {
+  Future<List<Mission>> readAllMissions() async {
     final db = await instance.database;
     const orderBy = '${MissionFields.id} DESC';
     final result = await db.query(
       missionsTable, 
       orderBy: orderBy
     );
-    if (onlyIsActive) {
-      return result.where((missionData) => missionData[MissionFields.isActive] == 1).map((missionData) => Mission.fromMap(missionData)).toList();
-    }
     return result.map((missionData) => Mission.fromMap(missionData)).toList();
   }
 
-  Future<List<Challenge>> readAllChallenges({bool onlyIsActive = false}) async {
+  Future<List<Challenge>> readAllChallenges() async {
     final db = await instance.database;
     const orderBy = '${ChallengeFields.id} DESC';
     final result = await db.query(
       challengesTable,
       orderBy: orderBy
     );
-    if (onlyIsActive) {
-      return result.where((challengeData) => challengeData[ChallengeFields.isActive] == 1).map((challengeData) => Challenge.fromJSON(challengeData)).toList();
-    }
     return result.map((challengeData) => Challenge.fromJSON(challengeData)).toList();
   }
 

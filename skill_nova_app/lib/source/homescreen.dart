@@ -138,6 +138,7 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
                                       SizedBox(
                                         height: 45,
                                         child: TextField(
+                                          onChanged: _filterItems,
                                           decoration: InputDecoration(
                                             enabledBorder: OutlineInputBorder(
                                                 borderRadius:

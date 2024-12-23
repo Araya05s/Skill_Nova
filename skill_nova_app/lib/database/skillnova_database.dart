@@ -87,11 +87,13 @@ class SkillNovaDatabase {
       ''');
   }
 
-  Future _upgradeDB(
+  Future _upgradeDB (
     Database db,
     int oldVersion,
     int newVersion,
-  ) async {}
+  ) async {
+
+  }
 
   Future<CourseCategory> createCourseCategory(
       CourseCategory courseCategory) async {
@@ -157,17 +159,6 @@ class SkillNovaDatabase {
     }
   }
 
-  Future<List<CourseCategory>> searchCourseCategories(String query) async {
-    final db = await database;
-    // Search only by title field
-    final result = await db.query(
-      'course_categories',
-      where: 'title LIKE ?', // Search in the title field
-      whereArgs: ['%$query%'], // Partial matching for the title
-    );
-    return result.map((map) => CourseCategory.fromMap(map)).toList();
-  }
-
   Future<List<CourseCategory>> readAllCourseCategories() async {
     final db = await instance.database;
     const orderBy = '${CourseCategoryFields.title} ASC';
@@ -175,6 +166,19 @@ class SkillNovaDatabase {
     return result
         .map((courseCategoryData) => CourseCategory.fromMap(courseCategoryData))
         .toList();
+  }
+
+  Future<List<CourseCategory>> searchCourseCategories(String query) async {
+    final db = await database;
+
+    // Search only by title field
+    final result = await db.query(
+      'course_categories',
+      where: 'title LIKE ?', // Search in the title field
+      whereArgs: ['%$query%'], // Partial matching for the title
+    );
+
+    return result.map((map) => CourseCategory.fromMap(map)).toList();
   }
 
   Future<List<Mission>> readAllMissions({bool onlyIsActive = false}) async {

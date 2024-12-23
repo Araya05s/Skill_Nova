@@ -59,7 +59,7 @@ class CourseCategory {
       return '${int.parse(minimum.replaceAll(RegExp(r'\D'), ''))} - $maximum';
     }
 
-    return '$minimum - $maximum';
+    return '$minimum – $maximum';
   }
 
   CourseCategory copy(

@@ -48,7 +48,8 @@ class CourseCategoryListTile extends StatelessWidget {
                             child: Image.file(
                               courseCategoryImage,
                               fit: BoxFit.cover,
-                            )),
+                            )
+                        ),
                       ),
                       const SizedBox(width: 6),
                       Column(

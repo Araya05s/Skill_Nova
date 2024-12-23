@@ -13,7 +13,8 @@ class SkillNovaDatabase {
   static const int _databaseVersion = 1;
 
   const SkillNovaDatabase._privateConstructor();
-  static const SkillNovaDatabase instance = SkillNovaDatabase._privateConstructor();
+  static const SkillNovaDatabase instance =
+      SkillNovaDatabase._privateConstructor();
 
   static Database? _database;
 
@@ -30,16 +31,17 @@ class SkillNovaDatabase {
       path,
       version: _databaseVersion,
       onCreate: _createDB,
+      onUpgrade: _upgradeDB,
     );
   }
 
-  Future _createDB (
+  Future _createDB(
     Database db,
     int version,
   ) async {
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     const textType = 'TEXT NOT NULL';
-    const intType = 'INTEGER NOT NULL';  // For fields like years, months, etc.
+    const intType = 'INTEGER NOT NULL'; // For fields like years, months, etc.
 
     await db.execute('''
       CREATE TABLE IF NOT EXISTS $courseCategoriesTable (
@@ -85,7 +87,14 @@ class SkillNovaDatabase {
       ''');
   }
 
-  Future<CourseCategory> createCourseCategory(CourseCategory courseCategory) async {
+  Future _upgradeDB(
+    Database db,
+    int oldVersion,
+    int newVersion,
+  ) async {}
+
+  Future<CourseCategory> createCourseCategory(
+      CourseCategory courseCategory) async {
     final db = await instance.database;
     final id = await db.insert(courseCategoriesTable, courseCategory.toMap());
     return courseCategory.copy(id: id);
@@ -99,10 +108,7 @@ class SkillNovaDatabase {
 
   Future<Challenge> createChallenge(Challenge challenge) async {
     final db = await instance.database;
-    final id = await db.insert(
-      challengesTable, 
-      challenge.toJSON()
-    );
+    final id = await db.insert(challengesTable, challenge.toJSON());
     return challenge.copy(id: id);
   }
 
@@ -151,34 +157,54 @@ class SkillNovaDatabase {
     }
   }
 
+  Future<List<CourseCategory>> searchCourseCategories(String query) async {
+    final db = await database;
+    // Search only by title field
+    final result = await db.query(
+      'course_categories',
+      where: 'title LIKE ?', // Search in the title field
+      whereArgs: ['%$query%'], // Partial matching for the title
+    );
+    return result.map((map) => CourseCategory.fromMap(map)).toList();
+  }
+
   Future<List<CourseCategory>> readAllCourseCategories() async {
     final db = await instance.database;
     const orderBy = '${CourseCategoryFields.title} ASC';
-    final result = await db.query(
-      courseCategoriesTable, 
-      orderBy: orderBy
-    );
-    return result.map((courseCategoryData) => CourseCategory.fromMap(courseCategoryData)).toList();
+    final result = await db.query(courseCategoriesTable, orderBy: orderBy);
+    return result
+        .map((courseCategoryData) => CourseCategory.fromMap(courseCategoryData))
+        .toList();
   }
 
-  Future<List<Mission>> readAllMissions() async {
+  Future<List<Mission>> readAllMissions({bool onlyIsActive = false}) async {
     final db = await instance.database;
     const orderBy = '${MissionFields.id} DESC';
-    final result = await db.query(
-      missionsTable, 
-      orderBy: orderBy
-    );
+    final result = await db.query(missionsTable, orderBy: orderBy);
+
+    if (onlyIsActive) {
+      return result
+          .where((missionData) => missionData[MissionFields.isActive] == 1)
+          .map((missionData) => Mission.fromMap(missionData))
+          .toList();
+    }
     return result.map((missionData) => Mission.fromMap(missionData)).toList();
   }
 
-  Future<List<Challenge>> readAllChallenges() async {
+  Future<List<Challenge>> readAllChallenges({bool onlyIsActive = false}) async {
     final db = await instance.database;
     const orderBy = '${ChallengeFields.id} DESC';
-    final result = await db.query(
-      challengesTable,
-      orderBy: orderBy
-    );
-    return result.map((challengeData) => Challenge.fromJSON(challengeData)).toList();
+    final result = await db.query(challengesTable, orderBy: orderBy);
+    if (onlyIsActive) {
+      return result
+          .where(
+              (challengeData) => challengeData[ChallengeFields.isActive] == 1)
+          .map((challengeData) => Challenge.fromJSON(challengeData))
+          .toList();
+    }
+    return result
+        .map((challengeData) => Challenge.fromJSON(challengeData))
+        .toList();
   }
 
   Future<int> updateCourseCategory(CourseCategory courseCategory) async {

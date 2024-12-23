@@ -22,7 +22,6 @@ class _AddMissionScreenState extends State<AddMissionScreen> {
   late final TextEditingController _titleController;
   late final TextEditingController _imagePathController;
   
-
   late final TextEditingController _courseMaterialsCountController;
   late final TextEditingController _xpRewardController;
 
@@ -178,7 +177,7 @@ class _AddMissionScreenState extends State<AddMissionScreen> {
             ? '0'
             : _durationSecondsController.text),
       ),
-      isActive: _isActive,
+      isActive: _isActive ?? true,
     );
     await SkillNovaDatabase.instance.updateMission(mission);
   }
@@ -335,7 +334,6 @@ class _AddMissionScreenState extends State<AddMissionScreen> {
                 },
               ),
               const SizedBox(height: 20),
-
               // Duration
               const Text(
                 'Time Limit / Duration (Days, Hours, Minutes, Seconds)',
@@ -466,7 +464,7 @@ class _AddMissionScreenState extends State<AddMissionScreen> {
                 hint: _courseCategoryItems.isNotEmpty ? const Text('Select a course category') : const Text('No course categories available'),
                 validator: (value) {
                   if (value == null) {
-                    return 'Please select a course category.';
+                    return "Please select a course category, or add one if you haven't added any.";
                   }
                   return null;
                 },

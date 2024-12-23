@@ -19,14 +19,11 @@ class _Admin_MissionsScreenState extends State<Admin_MissionsScreen> {
 
   Future<void> getAllMissions() async {
     setState(() => isLoading = true);
-
     missions = await SkillNovaDatabase.instance.readAllMissions();
-
     for (final courseCategory
         in await SkillNovaDatabase.instance.readAllCourseCategories()) {
       courseCategoriesIdToNameMap[courseCategory.id] = courseCategory.title;
     }
-
     setState(() => isLoading = false);
   }
 
@@ -52,20 +49,23 @@ class _Admin_MissionsScreenState extends State<Admin_MissionsScreen> {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const UsertoAdmin(isAdminMode: true),
+                  builder: (context) => const UsertoAdmin(
+                    isAdminMode: true
+                  ),
                 ),
               );
             },
             child: const Icon(
               Icons.arrow_back,
-            )),
+            )
+        ),
       ),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : _buildMissionsList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          Navigator.of(context).push(
+          await Navigator.of(context).push(
             MaterialPageRoute(
               builder: (_) => AddMissionScreen(),
             ),
@@ -100,7 +100,8 @@ class _Admin_MissionsScreenState extends State<Admin_MissionsScreen> {
                 mission: mission,
                 courseCategoryName:
                     courseCategoriesIdToNameMap[mission.categoryId] ??
-                        "Semua Kategori"));
+                        "Semua Kategori")
+        );
       },
     );
   }

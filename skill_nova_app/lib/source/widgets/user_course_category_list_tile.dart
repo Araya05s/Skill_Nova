@@ -33,6 +33,7 @@ class User_Course_Category extends StatelessWidget {
                           child: Image.file(
                             courseCategoryImage,
                             width: 100,
+                            height: 120,
                             fit: BoxFit.cover,
                           ),
                       )

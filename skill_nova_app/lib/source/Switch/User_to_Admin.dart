@@ -75,6 +75,27 @@ class UsertoAdmin extends StatelessWidget {
                 ),
               ),
             ),
+            !isAdminMode ? Container(
+              margin: EdgeInsets.symmetric(vertical: 20),
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    side: BorderSide(color: Color(0xff782A8C), width: 1),
+                    backgroundColor: Colors.red.shade50,
+                    shadowColor: Colors.black,
+                    elevation: 2,
+                    padding: EdgeInsets.symmetric(horizontal: 40, vertical: 10)
+                ),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text(
+                  "Logout dari akun user ini" ,
+                  style: TextStyle(
+                      color: Colors.red.shade700
+                  ),
+                ),
+              ),
+            ):SizedBox(),
           ],
         ),
       ),

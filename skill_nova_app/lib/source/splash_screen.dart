@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:skill_nova_app/source/homepage.dart';
+import 'package:skill_nova_app/source/Authenticator/auth.dart';
 
 class SplashScreen extends StatefulWidget{
   const SplashScreen({super.key});
@@ -18,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
 
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => const HomePage(),
+        builder: (_) => const AuthScreen(),
       ));
     });
   }

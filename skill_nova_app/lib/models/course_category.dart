@@ -6,6 +6,8 @@ import 'package:skill_nova_app/models/custom/CustomDuration.dart';
 const String courseCategoriesTable = 'course_categories';
 
 class CourseCategoryFields {
+
+
   static final List<String> values = [
     id,
     title,
@@ -111,3 +113,4 @@ class CourseCategory {
         image: map[CourseCategoryFields.image] as String);
   }
 }
+

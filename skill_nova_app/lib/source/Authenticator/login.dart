@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:skill_nova_app/database/skillnova_database.dart';
 import 'package:skill_nova_app/models/users.dart';
+import 'package:skill_nova_app/source/Admin/Admin_homepage.dart';
 import 'package:skill_nova_app/source/Authenticator/signup.dart';
 import 'package:skill_nova_app/source/homepage.dart';
 
@@ -18,18 +19,33 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isLogintrue = false;
 
   Future<bool> isLoginUserAdmin() async {
-    var result = await SkillNovaDatabase.instance.
+    var user = await SkillNovaDatabase.instance.getUser(username.text.trim(), columns: ["isAdmin"]);
+    return user?.isAdmin ?? false;
   }
 
 
   void login() async {
     var result = await SkillNovaDatabase.instance.authenticate(
-        Users(usrName: username.text, password: password.text, isAdmin: )
+      Users(
+        usrName: username.text.trim(), 
+        password: password.text.trim(), 
+        isAdmin: false
+      ),
     );
+
+    if (result) {
+      final isAdmin = await isLoginUserAdmin();
+      if (isAdmin) {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const Admin_HomePage()),);
+      } else {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomePage()),);
+      }
+    } else {
+      setState(() {
+        isLogintrue = true;
+      });
+    }
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {

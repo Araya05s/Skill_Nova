@@ -56,11 +56,11 @@ class SkillNovaDatabase {
     return db.insert("users", usr.toMap());
   }
 
-  Future<Users?> getUser(String usrName, {List<String> columns = ["*"]}) async {
+  Future<Users?> getUser(String usrName, {List<String>? columns}) async {
     final Database db = await instance.database;
     var result = await db.query(
       "users",
-      columns: ["*"],
+      columns: columns ??["*"],
       where: 'usrName = ?',
       whereArgs: [usrName],
     );

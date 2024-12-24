@@ -504,7 +504,7 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                 value: _courseCategoryItems
                         .any((item) => item.value == _selectedCourseCategoryId)
                     ? _selectedCourseCategoryId
-                    : null, // Ensure the value exists in the dropdown items,,
+                    : null, // Ensure the value exists in the dropdown items,
                 decoration: const InputDecoration(
                   labelText: 'Course Category',
                   border: OutlineInputBorder(),

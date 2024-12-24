@@ -5,6 +5,7 @@ import 'package:path/path.dart';
 import 'package:skill_nova_app/models/challenge.dart';
 import 'package:skill_nova_app/models/course_category.dart';
 import 'package:skill_nova_app/models/mission.dart';
+import 'package:skill_nova_app/models/users.dart';
 import 'package:sqflite/sqflite.dart';
 
 @immutable
@@ -34,6 +35,38 @@ class SkillNovaDatabase {
       onUpgrade: _upgradeDB,
     );
   }
+
+  Future<bool> authenticate(Users usr) async {
+    final Database db = await instance.database;
+    var result = await db.query(
+      "users",
+      columns: ["*"],
+      where: 'usrName = ? AND usrPassword = ?',
+      whereArgs: [usr.usrName, usr.password],
+    );
+    if (result.isNotEmpty) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<int> createUser(Users usr) async {
+    final Database db = await instance.database;
+    return db.insert("users", usr.toMap());
+  }
+
+  Future<Users?> getUser(String usrName, {List<String> columns = ["*"]}) async {
+    final Database db = await instance.database;
+    var result = await db.query(
+      "users",
+      columns: ["*"],
+      where: 'usrName = ?',
+      whereArgs: [usrName],
+    );
+    return result.isNotEmpty ? Users.fromMap(result.first):null;
+  }
+
 
   Future _createDB(
     Database db,
@@ -87,12 +120,21 @@ class SkillNovaDatabase {
       ''');
   }
 
-  Future _upgradeDB (
+  Future _upgradeDB(
     Database db,
     int oldVersion,
     int newVersion,
   ) async {
-
+    await db.execute('''
+      CREATE TABLE IF NOT EXISTS users (
+        usrId INTEGER PRIMARY KEY AUTOINCREMENT,
+        fullName TEXT,
+        email TEXT,
+        usrName TEXT UNIQUE,
+        usrPassword TEXT,
+        isAdmin INTEGER NOT NULL
+      )
+      ''');
   }
 
   Future<CourseCategory> createCourseCategory(

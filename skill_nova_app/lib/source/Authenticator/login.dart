@@ -14,119 +14,123 @@ class _LoginScreenState extends State<LoginScreen> {
   final password = TextEditingController();
   bool isChecked = false;
   bool isLogintrue = false;
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "LOGIN",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 35
-                  ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height*0.05,),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  width: MediaQuery.of(context).size.width*0.9,
-                  height: 55,
-                  decoration: BoxDecoration(color: Color(0xffCCBEF1), borderRadius: BorderRadius.circular(5)),
-                  child: Center(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Username",
-                        icon: Icon(Icons.account_circle),
-                      ),
-                      controller: username,
+      body: SingleChildScrollView(
+        child: SafeArea(
+            child: Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "LOGIN",
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 35
                     ),
                   ),
-                ),
-                SizedBox(height: MediaQuery.of(context).size.height*0.015,),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  width: MediaQuery.of(context).size.width*0.9,
-                  height: 55,
-                  decoration: BoxDecoration(color: Color(0xffCCBEF1), borderRadius: BorderRadius.circular(5)),
-                  child: Center(
-                    child: TextFormField(
-                      obscureText: true,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Password",
-                        icon: Icon(Icons.lock),
-                      ),
-                      controller: password,
-                    ),
-                  ),
-                ),
-                ListTile(
-                  horizontalTitleGap: 2,
-                  title: Text("Remember me"),
-                  leading: Checkbox(
-                      value: isChecked,
-                      onChanged: (value){
-                        setState(() {
-                          isChecked = !isChecked;
-                        });
-                      }
-                  ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.9,
-                  child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => const HomePage()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xff5271FF),
-                          elevation: 5
-                      ),
-                      child: Text(
-                        "LOGIN",
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white
+                  SizedBox(height: MediaQuery.of(context).size.height*0.05,),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    width: MediaQuery.of(context).size.width*0.9,
+                    height: 55,
+                    decoration: BoxDecoration(color: Color(0xffCCBEF1), borderRadius: BorderRadius.circular(5)),
+                    child: Center(
+                      child: TextField(
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Username",
+                          icon: Icon(Icons.account_circle),
                         ),
-                      )),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      "Don't have an account?",
-                      style: TextStyle(
-                        color: Colors.grey
+                        controller: username,
                       ),
                     ),
-                    TextButton(
+                  ),
+                  SizedBox(height: MediaQuery.of(context).size.height*0.015,),
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    width: MediaQuery.of(context).size.width*0.9,
+                    height: 55,
+                    decoration: BoxDecoration(color: Color(0xffCCBEF1), borderRadius: BorderRadius.circular(5)),
+                    child: Center(
+                      child: TextFormField(
+                        obscureText: true,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Password",
+                          icon: Icon(Icons.lock),
+                        ),
+                        controller: password,
+                      ),
+                    ),
+                  ),
+                  ListTile(
+                    horizontalTitleGap: 2,
+                    title: Text("Remember me"),
+                    leading: Checkbox(
+                        value: isChecked,
+                        onChanged: (value){
+                          setState(() {
+                            isChecked = !isChecked;
+                          });
+                        }
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width*0.9,
+                    child: ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => SignupScreen()),
+                            MaterialPageRoute(builder: (context) => const HomePage()),
                           );
                         },
-                        child: const Text("SIGN UP")
-                    )
-                  ],
-                ),
-
-                isLogintrue? Text(
-                    "Username or Password is incorrect",
-                  style: TextStyle(
-                    color: Colors.red.shade900
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xff5271FF),
+                            elevation: 5
+                        ),
+                        child: Text(
+                          "LOG IN",
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.white
+                          ),
+                        )),
                   ),
-                ):const SizedBox()
-              ],
-            ),
-          )
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "Don't have an account?",
+                        style: TextStyle(
+                          color: Colors.grey
+                        ),
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => SignupScreen()),
+                            );
+                          },
+                          child: const Text("SIGN UP")
+                      )
+                    ],
+                  ),
+        
+                  isLogintrue? Text(
+                      "Username or Password is incorrect",
+                    style: TextStyle(
+                      color: Colors.red.shade900
+                    ),
+                  ):const SizedBox()
+                ],
+              ),
+            )
+        ),
       ),
     );
   }

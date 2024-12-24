@@ -30,7 +30,7 @@ class _MissionsScreenState extends State<MissionsScreen> {
     setState(() => isLoading = false);
   }
 
-    @override
+  @override
   void initState() {
     super.initState();
     getAllMissions();

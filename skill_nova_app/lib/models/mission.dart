@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:duration/duration.dart';
 import 'package:flutter/foundation.dart';
+import 'package:skill_nova_app/models/course_category.dart';
 
 const String missionsTable = 'missions';
 
@@ -40,6 +41,7 @@ class Mission {
   final Duration duration;
   final String image;
   final bool isActive;
+  final CourseCategory? courseCategory;
 
   const Mission({
     this.id,
@@ -51,6 +53,7 @@ class Mission {
     required this.duration,
     required this.image,
     required this.isActive,
+    this.courseCategory,
   });
 
   Mission copy({
@@ -63,6 +66,7 @@ class Mission {
     Duration? duration,
     String? image,
     bool? isActive,
+    CourseCategory? courseCategory,
   }) => Mission(
     id: id ?? this.id,
     categoryId: categoryId ?? this.categoryId,
@@ -73,6 +77,7 @@ class Mission {
     duration: duration ?? this.duration,
     image: image ?? this.image,
     isActive: isActive ?? this.isActive,
+    courseCategory: courseCategory ?? this.courseCategory,
   );
 
   Map<String, dynamic> toMap() {

@@ -469,7 +469,9 @@ class _MissionsScreenState extends State<MissionsScreen> {
         final mission = missions[index];
 
         return GestureDetector(
-          onTap: () async {},
+          onTap: () async {
+            
+          },
           child: UserMissionListTile(
             mission: mission,
             courseCategoryName: courseCategoriesIdToNameMap[mission.categoryId] ?? "Semua Kategori",

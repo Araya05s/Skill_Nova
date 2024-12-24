@@ -40,6 +40,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
 
   bool _skillsValidated = false;
   bool _tagsValidated = false;
+  bool? _isActive = true;
 
   @override
   void initState() {
@@ -72,6 +73,7 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
       _upperDaysController.text =
           widget.courseCategory!.upperDuration.days.toString();
       _selectedImage = File(_imagePathController.text);
+      _isActive = widget.courseCategory?.isActive ?? true;
     }
     super.initState();
   }
@@ -153,7 +155,9 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
         ),
         certificateType: _certificateType ?? 'Unspecified',
         tags: _tags,
-        image: _imagePathController.text);
+        image: _imagePathController.text,
+        isActive: _isActive ?? true,
+    );
 
     await SkillNovaDatabase.instance.createCourseCategory(courseCategory);
   }
@@ -186,7 +190,9 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
         ),
         certificateType: _certificateType ?? 'Unspecified',
         tags: _tags,
-        image: _imagePathController.text);
+        image: _imagePathController.text,
+        isActive: _isActive ?? widget.courseCategory!.isActive,
+    );
 
     await SkillNovaDatabase.instance.updateCourseCategory(courseCategory);
   }
@@ -619,6 +625,15 @@ class _AddCourseCategoryScreenState extends State<AddCourseCategoryScreen> {
                         style: TextStyle(color: Colors.grey),
                       ),
                 const SizedBox(height: 20),
+                CheckboxListTile(
+                  title: const Text('Activate this mission for display?'),
+                  value: _isActive,
+                  onChanged: (value) {
+                    setState(() {
+                      _isActive = value;
+                    });
+                  },
+                ),
                 ElevatedButton(
                   onPressed: addUpdateCourseCategory,
                   child: Text(widget.courseCategory != null

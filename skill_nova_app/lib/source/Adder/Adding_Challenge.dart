@@ -529,7 +529,7 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
               const SizedBox(height: 20),
               // IsActive Checkbox
               CheckboxListTile(
-                title: const Text('Activate this mission for display?'),
+                title: const Text('Activate this challenge for display?'),
                 value: _isActive,
                 onChanged: (value) {
                   setState(() {

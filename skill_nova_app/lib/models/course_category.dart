@@ -6,8 +6,6 @@ import 'package:skill_nova_app/models/custom/CustomDuration.dart';
 const String courseCategoriesTable = 'course_categories';
 
 class CourseCategoryFields {
-
-
   static final List<String> values = [
     id,
     title,
@@ -16,7 +14,8 @@ class CourseCategoryFields {
     upperDuration,
     certificateType,
     tags,
-    image
+    image,
+    isActive,
   ];
 
   static const id = 'id';
@@ -27,6 +26,7 @@ class CourseCategoryFields {
   static const certificateType = 'certificate_type';
   static const tags = 'tags';
   static const image = 'image';
+  static const isActive = 'is_active';
 }
 
 @immutable
@@ -39,16 +39,19 @@ class CourseCategory {
   final String certificateType;
   final List<String> tags;
   final String image;
+  final bool isActive;
 
-  const CourseCategory(
-      {this.id,
-      required this.title,
-      required this.skills,
-      required this.lowerDuration,
-      required this.upperDuration,
-      required this.certificateType,
-      required this.tags,
-      required this.image});
+  const CourseCategory({
+    this.id,
+    required this.title,
+    required this.skills,
+    required this.lowerDuration,
+    required this.upperDuration,
+    required this.certificateType,
+    required this.tags,
+    required this.image,
+    required this.isActive,
+  });
 
   String getDuration() {
     final String minimum = lowerDuration.toStringTopper();
@@ -72,7 +75,8 @@ class CourseCategory {
           CustomDuration? upperDuration,
           String? certificateType,
           List<String>? tags,
-          String? image}) =>
+          String? image,
+          bool? isActive}) =>
       CourseCategory(
           id: id ?? this.id,
           title: title ?? this.title,
@@ -81,7 +85,8 @@ class CourseCategory {
           upperDuration: upperDuration ?? this.upperDuration,
           certificateType: certificateType ?? this.certificateType,
           tags: tags ?? this.tags,
-          image: image ?? this.image);
+          image: image ?? this.image,
+          isActive: isActive ?? this.isActive);
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -92,7 +97,8 @@ class CourseCategory {
       CourseCategoryFields.upperDuration: upperDuration.toString(),
       CourseCategoryFields.certificateType: certificateType,
       CourseCategoryFields.tags: json.encode(tags),
-      CourseCategoryFields.image: image
+      CourseCategoryFields.image: image,
+      CourseCategoryFields.isActive: isActive ? 1 : 0,
     };
   }
 
@@ -110,7 +116,7 @@ class CourseCategory {
             map[CourseCategoryFields.upperDuration] as String),
         certificateType: map[CourseCategoryFields.certificateType] as String,
         tags: List<String>.from(json.decode(map[CourseCategoryFields.tags])),
-        image: map[CourseCategoryFields.image] as String);
+        image: map[CourseCategoryFields.image] as String,
+        isActive: (map[CourseCategoryFields.isActive] as int) == 1 ? true : false);
   }
 }
-

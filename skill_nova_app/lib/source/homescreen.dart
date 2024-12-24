@@ -22,7 +22,7 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
     setState(() => isLoading = true);
 
     courseCategories =
-        await SkillNovaDatabase.instance.readAllCourseCategories();
+        await SkillNovaDatabase.instance.readAllCourseCategories(onlyIsActive: true);
 
     setState(() => isLoading = false);
   }
@@ -30,13 +30,13 @@ class _User_HomeScreenState extends State<User_HomeScreen> {
   Future<void> _filterItems(String query) async {
     if (query.isEmpty) {
       final categorizes =
-      await SkillNovaDatabase.instance.readAllCourseCategories();
+      await SkillNovaDatabase.instance.readAllCourseCategories(onlyIsActive: true);
 
       setState(() {
       courseCategories = categorizes;
       });
     } else {
-      final filteredcategories = await SkillNovaDatabase.instance.searchCourseCategories(query);
+      final filteredcategories = await SkillNovaDatabase.instance.searchCourseCategories(query, onlyIsActive: true);
       setState(() {
         courseCategories = filteredcategories;
       });

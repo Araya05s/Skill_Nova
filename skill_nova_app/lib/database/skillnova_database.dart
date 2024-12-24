@@ -1,4 +1,4 @@
-// Singleton database class for SkillNova
+// Singleton database class for SkillNova app
 
 import 'package:flutter/foundation.dart' show immutable;
 import 'package:path/path.dart';
@@ -10,13 +10,15 @@ import 'package:sqflite/sqflite.dart';
 @immutable
 class SkillNovaDatabase {
   static const String _databaseName = 'skillnova.db';
-  static const int _databaseVersion = 1;
+  static const int _databaseVersion = 2;
 
   const SkillNovaDatabase._privateConstructor();
   static const SkillNovaDatabase instance =
       SkillNovaDatabase._privateConstructor();
 
   static Database? _database;
+
+  static const List<String> defaultColumns = ["*"];
 
   Future<Database> get database async {
     if (_database != null && _database!.isOpen) return _database!;
@@ -87,12 +89,17 @@ class SkillNovaDatabase {
       ''');
   }
 
-  Future _upgradeDB (
+  Future _upgradeDB(
     Database db,
     int oldVersion,
     int newVersion,
   ) async {
-
+    if (oldVersion < 2) {
+      // Add the `is_active` column to the `course_categories` table.
+      await db.execute('''
+      ALTER TABLE $courseCategoriesTable ADD COLUMN ${CourseCategoryFields.isActive} INTEGER NOT NULL DEFAULT 1;
+    ''');
+    }
   }
 
   Future<CourseCategory> createCourseCategory(
@@ -159,16 +166,28 @@ class SkillNovaDatabase {
     }
   }
 
-  Future<List<CourseCategory>> readAllCourseCategories() async {
+  Future<List<CourseCategory>> readAllCourseCategories(
+      {bool onlyIsActive = false}) async {
     final db = await instance.database;
-    const orderBy = '${CourseCategoryFields.title} ASC';
+    const orderBy = '${CourseCategoryFields.id} DESC';
     final result = await db.query(courseCategoriesTable, orderBy: orderBy);
+
+    if (onlyIsActive) {
+      return result
+          .where((courseCategoryData) =>
+              courseCategoryData[CourseCategoryFields.isActive] == 1)
+          .map((courseCategoryData) =>
+              CourseCategory.fromMap(courseCategoryData))
+          .toList();
+    }
+
     return result
         .map((courseCategoryData) => CourseCategory.fromMap(courseCategoryData))
         .toList();
   }
 
-  Future<List<CourseCategory>> searchCourseCategories(String query) async {
+  Future<List<CourseCategory>> searchCourseCategories(String query,
+      {bool onlyIsActive = false}) async {
     final db = await database;
 
     // Search only by title field
@@ -177,6 +196,13 @@ class SkillNovaDatabase {
       where: 'title LIKE ?', // Search in the title field
       whereArgs: ['%$query%'], // Partial matching for the title
     );
+
+    if (onlyIsActive) {
+      return result
+          .where((map) => map[CourseCategoryFields.isActive] == 1)
+          .map((map) => CourseCategory.fromMap(map))
+          .toList();
+    }
 
     return result.map((map) => CourseCategory.fromMap(map)).toList();
   }
@@ -194,6 +220,33 @@ class SkillNovaDatabase {
     }
     return result.map((missionData) => Mission.fromMap(missionData)).toList();
   }
+
+  /* Future<List<Mission>> readAllMissionsWithCourseCategories(
+      {bool onlyIsActive = false}) async {
+    final db = await instance.database;
+    final result = await db.rawQuery('''
+      SELECT $missionsTable.*, $courseCategoriesTable.*
+      FROM $missionsTable
+      JOIN $courseCategoriesTable ON $missionsTable.${MissionFields.categoryId} = $courseCategoriesTable.${CourseCategoryFields.id}
+      ORDER BY $missionsTable.${MissionFields.id} DESC
+    ''');
+    List<Mission> missions = result.map((missionData) {
+      var missionMap = Map<String, dynamic>.from(missionData);
+      var courseCategoryMap = {
+        ...missionMap
+          ..removeWhere((key, value) => !key.startsWith(
+              courseCategoriesTable))
+      };
+      Mission mission = Mission.fromMap(missionMap);
+      CourseCategory? courseCategory = courseCategoryMap.isNotEmpty ? CourseCategory.fromMap(courseCategoryMap) : null;
+      mission.courseCategory = courseCategory;
+      return mission;
+    }).toList();
+    if (onlyIsActive) {
+      return missions.where((mission) => mission.isActive).toList();
+    }
+    return missions;
+  }*/
 
   Future<List<Challenge>> readAllChallenges({bool onlyIsActive = false}) async {
     final db = await instance.database;

@@ -21,7 +21,7 @@ class AddMissionScreen extends StatefulWidget {
 class _AddMissionScreenState extends State<AddMissionScreen> {
   late final TextEditingController _titleController;
   late final TextEditingController _imagePathController;
-  
+
   late final TextEditingController _courseMaterialsCountController;
   late final TextEditingController _xpRewardController;
 
@@ -36,7 +36,8 @@ class _AddMissionScreenState extends State<AddMissionScreen> {
   bool? _isActive = true;
 
   Future<void> fetchCourseCategories() async {
-    final courseCategories = await SkillNovaDatabase.instance.readAllCourseCategories();
+    final courseCategories =
+        await SkillNovaDatabase.instance.readAllCourseCategories();
 
     setState(() {
       _courseCategoryItems = courseCategories.map((courseCategory) {
@@ -52,7 +53,8 @@ class _AddMissionScreenState extends State<AddMissionScreen> {
   void initState() {
     super.initState();
     // Initialize controllers
-    _selectedImage = widget.mission?.image != null ? File(widget.mission!.image) : null;
+    _selectedImage =
+        widget.mission?.image != null ? File(widget.mission!.image) : null;
     _titleController = TextEditingController(text: widget.mission?.title ?? '');
     _imagePathController =
         TextEditingController(text: widget.mission?.image ?? '');
@@ -452,16 +454,24 @@ class _AddMissionScreenState extends State<AddMissionScreen> {
               const SizedBox(height: 20),
               // Course Category Dropdown
               DropdownButtonFormField<int>(
-                value: _selectedCourseCategoryId,
+                value: _courseCategoryItems
+                        .any((item) => item.value == _selectedCourseCategoryId)
+                    ? _selectedCourseCategoryId
+                    : null, // Ensure the value exists in the dropdown items,
                 decoration: const InputDecoration(
                   labelText: 'Course Category',
                   border: OutlineInputBorder(),
                 ),
-                items: _courseCategoryItems.isNotEmpty ? _courseCategoryItems : [],
-                onChanged: _courseCategoryItems.isNotEmpty ? (value) {
-                  setState(() => _selectedCourseCategoryId = value);
-                } : null,
-                hint: _courseCategoryItems.isNotEmpty ? const Text('Select a course category') : const Text('No course categories available'),
+                items:
+                    _courseCategoryItems.isNotEmpty ? _courseCategoryItems : [],
+                onChanged: _courseCategoryItems.isNotEmpty
+                    ? (value) {
+                        setState(() => _selectedCourseCategoryId = value);
+                      }
+                    : null,
+                hint: _courseCategoryItems.isNotEmpty
+                    ? const Text('Select a course category')
+                    : const Text('No course categories available'),
                 validator: (value) {
                   if (value == null) {
                     return "Please select a course category, or add one if you haven't added any.";

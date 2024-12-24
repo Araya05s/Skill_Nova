@@ -223,22 +223,25 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          widget.challenge != null ? 'Update This Challenge' : 'Add A New Challenge'),
-        actions: widget.challenge != null ? [
-          IconButton(
-            onPressed: () async {
-              await SkillNovaDatabase.instance.deleteChallenge(
-                widget.challenge!.id!,
-              );
-              Navigator.of(context).pop();
-            },
-            icon: const Icon(
-              Icons.delete,
-              color: Colors.red,
-            ),
-          )
-        ] : [],
+        title: Text(widget.challenge != null
+            ? 'Update This Challenge'
+            : 'Add A New Challenge'),
+        actions: widget.challenge != null
+            ? [
+                IconButton(
+                  onPressed: () async {
+                    await SkillNovaDatabase.instance.deleteChallenge(
+                      widget.challenge!.id!,
+                    );
+                    Navigator.of(context).pop();
+                  },
+                  icon: const Icon(
+                    Icons.delete,
+                    color: Colors.red,
+                  ),
+                )
+              ]
+            : [],
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(
@@ -269,13 +272,12 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                 controller: _imagePathController,
                 readOnly: true,
                 decoration: InputDecoration(
-                  labelText: 'Image Path',
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    onPressed: _pickAndCopyImage, 
-                    icon: const Icon(Icons.folder),
-                  )
-                ),
+                    labelText: 'Image Path',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      onPressed: _pickAndCopyImage,
+                      icon: const Icon(Icons.folder),
+                    )),
                 validator: (value) {
                   if (value!.isEmpty && _selectedImage == null) {
                     return 'Please provide an image file for this specific challenge';
@@ -283,33 +285,39 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 20,),
-              _selectedImage != null 
-                ? Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        'Selected Image:',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
+              const SizedBox(
+                height: 20,
+              ),
+              _selectedImage != null
+                  ? Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Selected Image:',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Image.file(
+                          _selectedImage!,
+                          width: double.infinity,
+                          height: 200,
+                          fit: BoxFit.cover,
+                        ),
+                      ],
+                    )
+                  : const Text(
+                      'No image file currently selected.',
+                      style: TextStyle(
+                        color: Colors.grey,
                       ),
-                      const SizedBox(height: 10,),
-                      Image.file(
-                        _selectedImage!,
-                        width: double.infinity,
-                        height: 200,
-                        fit: BoxFit.cover,
-                      ),
-                    ],
-                  )
-                : const Text(
-                  'No image file currently selected.',
-                  style: TextStyle(
-                    color: Colors.grey,
-                  ),
-                ),
-              const SizedBox(height: 20,),
+                    ),
+              const SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 controller: _questionsCountController,
                 decoration: const InputDecoration(
@@ -342,16 +350,21 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               DropdownButtonFormField<Difficulty>(
                 value: _selectedDifficulty,
-                items: Difficulty.values.map(
-                  (difficulty) => DropdownMenuItem(
-                    value: difficulty,
-                    child: Text(difficulty.name),
-                  ),
-                ).toList(), 
-                onChanged: (value) => setState(() => _selectedDifficulty = value),
+                items: Difficulty.values
+                    .map(
+                      (difficulty) => DropdownMenuItem(
+                        value: difficulty,
+                        child: Text(difficulty.name),
+                      ),
+                    )
+                    .toList(),
+                onChanged: (value) =>
+                    setState(() => _selectedDifficulty = value),
                 hint: const Text('Select a difficulty level'),
                 decoration: const InputDecoration(
                   labelText: 'Difficulty Level',
@@ -364,7 +377,9 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                   return null;
                 },
               ),
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               TextFormField(
                 controller: _xpRewardController,
                 decoration: const InputDecoration(
@@ -486,16 +501,24 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
               ),
               const SizedBox(height: 20),
               DropdownButtonFormField<int>(
-                value: _selectedCourseCategoryId,
+                value: _courseCategoryItems
+                        .any((item) => item.value == _selectedCourseCategoryId)
+                    ? _selectedCourseCategoryId
+                    : null, // Ensure the value exists in the dropdown items,,
                 decoration: const InputDecoration(
                   labelText: 'Course Category',
                   border: OutlineInputBorder(),
                 ),
-                items: _courseCategoryItems.isNotEmpty ? _courseCategoryItems : [],
-                onChanged: _courseCategoryItems.isNotEmpty ? (value) {
-                  setState(() => _selectedCourseCategoryId = value);
-                } : null,
-                hint: _courseCategoryItems.isNotEmpty ? const Text('Select a course category') : const Text('No course categories available'),
+                items:
+                    _courseCategoryItems.isNotEmpty ? _courseCategoryItems : [],
+                onChanged: _courseCategoryItems.isNotEmpty
+                    ? (value) {
+                        setState(() => _selectedCourseCategoryId = value);
+                      }
+                    : null,
+                hint: _courseCategoryItems.isNotEmpty
+                    ? const Text('Select a course category')
+                    : const Text('No course categories available'),
                 validator: (value) {
                   if (value == null) {
                     return "Please select a course category, or add one if you haven't added any.";

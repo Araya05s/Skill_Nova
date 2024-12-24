@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:skill_nova_app/database/skillnova_database.dart';
+import 'package:skill_nova_app/models/users.dart';
 import 'package:skill_nova_app/source/Authenticator/signup.dart';
 import 'package:skill_nova_app/source/homepage.dart';
 
@@ -15,7 +17,20 @@ class _LoginScreenState extends State<LoginScreen> {
   bool isChecked = false;
   bool isLogintrue = false;
 
-  
+  Future<bool> isLoginUserAdmin() async {
+    var result = await SkillNovaDatabase.instance.
+  }
+
+
+  void login() async {
+    var result = await SkillNovaDatabase.instance.authenticate(
+        Users(usrName: username.text, password: password.text, isAdmin: )
+    );
+  }
+
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

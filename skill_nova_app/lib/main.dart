@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:skill_nova_app/database/skillnova_database.dart';
 import 'source/splash_screen.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const MyApp());
+
+  SkillNovaDatabase.instance.close();
 }
 
 class MyApp extends StatelessWidget {
@@ -14,10 +19,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'SKILL NOVA',
       theme: ThemeData(
+        useMaterial3: true,
       ),
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
     );
   }
 }
-

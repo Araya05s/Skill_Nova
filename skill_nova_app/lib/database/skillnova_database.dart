@@ -227,18 +227,20 @@ class SkillNovaDatabase {
     final result = await db.rawQuery('''
       SELECT $missionsTable.*, $courseCategoriesTable.*
       FROM $missionsTable
-      JOIN $courseCategoriesTable ON $missionsTable.${MissionFields.categoryId} = $courseCategoriesTable.${CourseCategoryFields.id}
+      JOIN $courseCategoriesTable 
+      ON $missionsTable.${MissionFields.categoryId} = $courseCategoriesTable.${CourseCategoryFields.id}
       ORDER BY $missionsTable.${MissionFields.id} DESC
     ''');
     List<Mission> missions = result.map((missionData) {
       var missionMap = Map<String, dynamic>.from(missionData);
       var courseCategoryMap = {
         ...missionMap
-          ..removeWhere((key, value) => !key.startsWith(
-              courseCategoriesTable))
+          ..removeWhere((key, value) => !key.startsWith(courseCategoriesTable))
       };
       Mission mission = Mission.fromMap(missionMap);
-      CourseCategory? courseCategory = courseCategoryMap.isNotEmpty ? CourseCategory.fromMap(courseCategoryMap) : null;
+      CourseCategory? courseCategory = courseCategoryMap.isNotEmpty
+          ? CourseCategory.fromMap(courseCategoryMap)
+          : null;
       mission.courseCategory = courseCategory;
       return mission;
     }).toList();
@@ -246,7 +248,7 @@ class SkillNovaDatabase {
       return missions.where((mission) => mission.isActive).toList();
     }
     return missions;
-  }*/
+  } */
 
   Future<List<Challenge>> readAllChallenges({bool onlyIsActive = false}) async {
     final db = await instance.database;

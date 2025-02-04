@@ -132,15 +132,15 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
     final List<Question> generatedQuestions = List.generate(
       questionsCount,
       (index) => Question(
-        question: 'Question ${index + 1}', // Example question text
+        question: 'Question ${index + 1}',
         options: [
           'Option A',
           'Option B',
           'Option C',
           'Option D',
           'Option E',
-        ], // Default options
-        correctOptionIndex: 0, // Default correct option index
+        ],
+        correctOptionIndex: 0,
       ),
     );
 
@@ -175,19 +175,18 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
           : _questionsCountController.text,
     );
 
-    // Generate a new list of questions based on the updated count
     final List<Question> updatedQuestions = List.generate(
       questionsCount,
       (index) => Question(
-        question: 'Updated Question ${index + 1}', // Updated question text
+        question: 'Updated Question ${index + 1}',
         options: [
           'Option A',
           'Option B',
           'Option C',
           'Option D',
           'Option E',
-        ], // Default options
-        correctOptionIndex: 0, // Default correct option index
+        ],
+        correctOptionIndex: 0,
       ),
     );
 
@@ -330,7 +329,7 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.digitsOnly,
-                  LengthLimitingTextInputFormatter(4), // Maximum 1000
+                  LengthLimitingTextInputFormatter(4),
                   TextInputFormatter.withFunction((oldValue, newValue) {
                     if (newValue.text.isNotEmpty &&
                         int.parse(newValue.text) > 1000) {
@@ -411,7 +410,6 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
               const SizedBox(height: 10),
               Row(
                 children: [
-                  // Hours
                   Expanded(
                     child: TextFormField(
                       controller: _durationHoursController,
@@ -440,7 +438,6 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  // Minutes
                   Expanded(
                     child: TextFormField(
                       controller: _durationMinutesController,
@@ -469,7 +466,6 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                     ),
                   ),
                   const SizedBox(width: 8),
-                  // Seconds
                   Expanded(
                     child: TextFormField(
                       controller: _durationSecondsController,
@@ -504,7 +500,7 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                 value: _courseCategoryItems
                         .any((item) => item.value == _selectedCourseCategoryId)
                     ? _selectedCourseCategoryId
-                    : null, // Ensure the value exists in the dropdown items,
+                    : null,
                 decoration: const InputDecoration(
                   labelText: 'Course Category',
                   border: OutlineInputBorder(),
@@ -527,7 +523,6 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              // IsActive Checkbox
               CheckboxListTile(
                 title: const Text('Activate this challenge for display?'),
                 value: _isActive,
@@ -538,7 +533,6 @@ class _AddChallengeScreenState extends State<AddChallengeScreen> {
                 },
               ),
               const SizedBox(height: 20),
-              // Submit Button
               ElevatedButton(
                 onPressed: addUpdateChallenge,
                 child: Text(
